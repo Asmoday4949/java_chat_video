@@ -1,0 +1,6 @@
+null
+BorderLayout
+FlowLayout -- Layout de base
+GridLayout
+BoxLayout
+~GridBagLayout~ -- Ne jamais utiliser (Compliqué)
