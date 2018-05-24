@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="/PDeploy/Deploy/ext/HmTimes.jar"/>
 	<classpathentry kind="lib" path="/PDeploy/Deploy/ressources.jar"/>
 	<classpathentry kind="lib" path="/PDeploy/Deploy/ext/BilatRmiTools.jar"/>
+	<classpathentry kind="lib" path="/PDeploy/Deploy/ext/webcam-capture-0.3.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
