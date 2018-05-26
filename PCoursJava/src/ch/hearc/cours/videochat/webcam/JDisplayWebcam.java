@@ -1,5 +1,6 @@
 package ch.hearc.cours.videochat.webcam;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -21,6 +22,9 @@ public class JDisplayWebcam extends JPanel
 	public JDisplayWebcam()
 		{
 		this.webcam = Webcam.getDefault();
+		Dimension fullHDDimension = new Dimension(1920,1080);
+ 		this.webcam.setCustomViewSizes(new Dimension[] { fullHDDimension });
+		this.webcam.setViewSize(fullHDDimension);
 
 		Assert.assertTrue(this.webcam != null);
 
