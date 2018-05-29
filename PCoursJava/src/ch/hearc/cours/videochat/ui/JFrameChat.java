@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+import ch.hearc.cours.videochat.webcam.JDisplayWebcam;
+
 public class JFrameChat extends JFrame
 	{
 
@@ -44,7 +46,7 @@ public class JFrameChat extends JFrame
 		setLayout(borderLayout);
 
 		this.add(boxConnection, BorderLayout.NORTH);
-		this.add(jDisplayWebcam);
+		this.add(jDisplayWebcam, BorderLayout.CENTER);
 		this.add(boxChat, BorderLayout.SOUTH);
 		}
 
