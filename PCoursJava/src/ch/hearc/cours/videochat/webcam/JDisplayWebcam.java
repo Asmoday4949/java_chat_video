@@ -1,9 +1,10 @@
-package ch.hearc.cours.videochat.ui;
+package ch.hearc.cours.videochat.webcam;
 
-import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -21,26 +22,27 @@ public class JDisplayWebcam extends JPanel
 	public JDisplayWebcam()
 		{
 		this.webcam = Webcam.getDefault();
+		Dimension fullHDDimension = new Dimension(1920,1080);
+ 		this.webcam.setCustomViewSizes(new Dimension[] { fullHDDimension });
+		this.webcam.setViewSize(fullHDDimension);
 
 		Assert.assertTrue(this.webcam != null);
 
 		geometry();
 		control();
 		appearance();
+
+		this.webcam.open();
+
+		this.image = this.webcam.getImage();
+
+
+		this.webcam.close();
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
-
-	/*------------------------------*\
-	|*				Set				*|
-	\*------------------------------*/
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
-
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
@@ -61,23 +63,11 @@ public class JDisplayWebcam extends JPanel
 
 	private void draw(Graphics2D g2d)
 		{
-		//g2d.drawImage(img, op, 0, 0);;
+		g2d.drawImage(this.image,0,0, this.image.getWidth(), image.getHeight(), null);
 		}
 
 	private void geometry()
 		{
-		// JComponent : Instanciation
-
-		// Layout : Specification
-			{
-			FlowLayout flowlayout = new FlowLayout(FlowLayout.CENTER);
-			setLayout(flowlayout);
-
-			// flowlayout.setHgap(20);
-			// flowlayout.setVgap(20);
-			}
-
-		// JComponent : add
 
 		}
 
@@ -97,5 +87,6 @@ public class JDisplayWebcam extends JPanel
 
 	// Tools
 	private Webcam webcam;
+	private BufferedImage image;
 
 	}
