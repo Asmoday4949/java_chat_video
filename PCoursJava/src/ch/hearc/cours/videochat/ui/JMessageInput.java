@@ -1,21 +1,20 @@
 package ch.hearc.cours.videochat.ui;
 
-import java.awt.Dimension;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JTextArea;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
-public class BoxChat extends Box
+public class JMessageInput extends Box
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public BoxChat()
+	public JMessageInput()
 		{
-		super(BoxLayout.Y_AXIS);
+		super(BoxLayout.X_AXIS);
 
 		geometry();
 		control();
@@ -40,21 +39,20 @@ public class BoxChat extends Box
 
 	private void geometry()
 		{
-		jTextAreaChat = new JTextArea();
-		boxMessageInput = new BoxMessageInput();
+		jTextFieldMessageInput = new JTextField();
+		jButtonSend = new JButton("Envoyer");
 
-		this.add(jTextAreaChat);
-		this.add(boxMessageInput);
+		this.add(jTextFieldMessageInput);
+		this.add(Box.createHorizontalGlue());
+		this.add(jButtonSend);
 		}
 
 	private void control()
 		{
-		jTextAreaChat.setEditable(false);
 		}
 
 	private void appearance()
 		{
-		jTextAreaChat.setPreferredSize(JTEXTAREA_CHAT_SIZE);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -62,9 +60,14 @@ public class BoxChat extends Box
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private JTextArea jTextAreaChat;
-	private BoxMessageInput boxMessageInput;
+	private JTextField jTextFieldMessageInput;
+	private JButton jButtonSend;
 
-	private static final Dimension JTEXTAREA_CHAT_SIZE = new Dimension(500, 300);
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
 
+	private static final int SPACE_WIDTH = 30;
 	}
+
+

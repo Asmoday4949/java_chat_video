@@ -19,4 +19,3 @@ public class UseTestWebcam
 		new JFrameComponent(new JDisplayWebcam());
 		}
 	}
-

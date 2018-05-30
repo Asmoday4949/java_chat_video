@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
-import ch.hearc.cours.videochat.webcam.JDisplayWebcam;
-
 public class JFrameChat extends JFrame
 	{
 
@@ -38,16 +36,11 @@ public class JFrameChat extends JFrame
 
 	private void geometry()
 		{
-		boxConnection = new BoxConnection();
-		jDisplayWebcam = new JDisplayWebcam();
-		boxChat = new BoxChat();
+		jPanelMain = new JMain();
 
-		borderLayout = new BorderLayout();
-		setLayout(borderLayout);
+		setLayout(new BorderLayout());
 
-		this.add(boxConnection, BorderLayout.NORTH);
-		this.add(jDisplayWebcam, BorderLayout.CENTER);
-		this.add(boxChat, BorderLayout.SOUTH);
+		this.add(jPanelMain, BorderLayout.CENTER);
 		}
 
 	private void control()
@@ -67,9 +60,6 @@ public class JFrameChat extends JFrame
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private BorderLayout borderLayout;
+	private JMain jPanelMain;
 
-	private BoxConnection boxConnection;
-	private JDisplayWebcam jDisplayWebcam;
-	private BoxChat boxChat;
 	}

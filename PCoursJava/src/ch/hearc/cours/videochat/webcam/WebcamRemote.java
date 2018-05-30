@@ -32,6 +32,11 @@ public class WebcamRemote
 	|*			  Static			*|
 	\*------------------------------*/
 
+	public static boolean isAvailable()
+		{
+		return webcamRemote != null;
+		}
+
 	/**
 	 * A appeler une seule fois et avant le getInstance!!!
 	 */

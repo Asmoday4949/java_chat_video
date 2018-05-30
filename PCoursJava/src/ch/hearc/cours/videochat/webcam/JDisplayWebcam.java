@@ -1,14 +1,15 @@
+
 package ch.hearc.cours.videochat.webcam;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.rmi.RemoteException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JPanel;
-
-import org.junit.Assert;
 
 import com.github.sarxos.webcam.Webcam;
 
@@ -21,23 +22,22 @@ public class JDisplayWebcam extends JPanel
 
 	public JDisplayWebcam()
 		{
-		this.webcam = Webcam.getDefault();
-		Dimension fullHDDimension = new Dimension(1920,1080);
- 		this.webcam.setCustomViewSizes(new Dimension[] { fullHDDimension });
-		this.webcam.setViewSize(fullHDDimension);
-
-		Assert.assertTrue(this.webcam != null);
-
+		//		this.webcam = Webcam.getDefault();
+		//		Dimension fullHDDimension = new Dimension(1920, 1080);
+		//		this.webcam.setCustomViewSizes(new Dimension[] { fullHDDimension });
+		//		this.webcam.setViewSize(fullHDDimension);
+		//
+		//		Assert.assertTrue(this.webcam != null);
+		//
 		geometry();
 		control();
 		appearance();
-
-		this.webcam.open();
-
-		this.image = this.webcam.getImage();
-
-
-		this.webcam.close();
+		//
+		//		this.webcam.open();
+		//
+		//		this.image = this.webcam.getImage();
+		//
+		//		this.webcam.close();
 		}
 
 	/*------------------------------------------------------------------*\
@@ -63,17 +63,41 @@ public class JDisplayWebcam extends JPanel
 
 	private void draw(Graphics2D g2d)
 		{
-		g2d.drawImage(this.image,0,0, this.image.getWidth(), image.getHeight(), null);
+		if (image != null)
+			{
+			g2d.drawImage(this.image, 0, 0, this.image.getWidth(), image.getHeight(), null);
+			}
 		}
 
 	private void geometry()
 		{
-
+		// rien
 		}
 
 	private void control()
 		{
-		// rien
+		timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask()
+			{
+
+			@Override
+			public void run()
+				{
+				try
+					{
+					if (WebcamRemote.isAvailable())
+						{
+						image = WebcamRemote.getInstance().getWebcam().getImage();
+						repaint();
+						}
+					}
+				catch (RemoteException e)
+					{
+					//Rien
+					//e.printStackTrace();
+					}
+				}
+			}, 500, 500);
 		}
 
 	private void appearance()
@@ -88,5 +112,6 @@ public class JDisplayWebcam extends JPanel
 	// Tools
 	private Webcam webcam;
 	private BufferedImage image;
+	private Timer timer;
 
 	}

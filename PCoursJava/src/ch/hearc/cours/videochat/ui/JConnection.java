@@ -1,3 +1,4 @@
+
 package ch.hearc.cours.videochat.ui;
 
 import java.awt.Dimension;
@@ -8,14 +9,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class BoxConnection extends Box
+public class JConnection extends Box
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public BoxConnection()
+	public JConnection()
 		{
 		super(BoxLayout.X_AXIS);
 
@@ -68,7 +69,9 @@ public class BoxConnection extends Box
 
 	private void control()
 		{
-		// rien
+		jButtonConnection.addActionListener((e) -> {
+			ServiceGUI.getInstance().connect(jTextFieldNickname.getText(), jTextFieldIP.getText(), Integer.parseInt(jTextFieldPort.getText()));
+		});
 		}
 
 	private void appearance()
@@ -106,4 +109,3 @@ public class BoxConnection extends Box
 	static private Dimension JTEXTFIELD_PORT_SIZE = new Dimension(70, 20);
 	static private int SPACE_WIDTH = 20;
 	}
-

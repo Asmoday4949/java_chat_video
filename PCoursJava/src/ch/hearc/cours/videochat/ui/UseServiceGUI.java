@@ -1,8 +1,9 @@
 
-package ch.hearc.cours.videochat.network;
+package ch.hearc.cours.videochat.ui;
 
-public class UseSettings
+public class UseServiceGUI
 	{
+
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
@@ -14,13 +15,7 @@ public class UseSettings
 
 	public static void main()
 		{
-		Settings.init("localhost");
-		Settings settings = Settings.getInstance();
-
-		System.out.println("RMI ADDRESS");
-		System.out.println(settings.getRmiAddress());
-		System.out.println("RMI ID");
-		System.out.println(settings.getRmiID());
+		ServiceGUI.getInstance();
 		}
 
 	/*------------------------------------------------------------------*\
