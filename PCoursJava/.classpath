@@ -6,14 +6,14 @@
 	<classpathentry kind="lib" path="/PDeploy/Deploy/ext/clavier.jar"/>
 	<classpathentry kind="lib" path="/PDeploy/Deploy/ext/HmTimes.jar"/>
 	<classpathentry kind="lib" path="/PDeploy/Deploy/ressources.jar"/>
-	<classpathentry kind="lib" path="/PDeploy/Deploy/ext/BilatRmiTools.jar"/>
-	<classpathentry kind="lib" path="/PDeploy/Deploy/ext/webcam-capture-0.3.10.jar">
+	<classpathentry exported="true" kind="lib" path="/PDeploy/Deploy/ext/BilatRmiTools.jar"/>
+	<classpathentry exported="true" kind="lib" path="/PDeploy/Deploy/ext/webcam-capture-0.3.10.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="PDeploy/Deploy/native_library/src"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/PDeploy/Deploy/ext/bridj-0.6.2.jar"/>
-	<classpathentry kind="lib" path="/PDeploy/Deploy/ext/slf4j-api-1.7.2.jar"/>
-	<classpathentry kind="lib" path="/PDeploy/Deploy/ext/slf4j-simple-1.7.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/PDeploy/Deploy/ext/bridj-0.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/PDeploy/Deploy/ext/slf4j-api-1.7.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/PDeploy/Deploy/ext/slf4j-simple-1.7.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

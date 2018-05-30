@@ -3,12 +3,13 @@ package ch.hearc.cours.videochat.webcam;
 
 import java.awt.image.BufferedImage;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 
 public interface Webcam_I extends Remote
 	{
-	public BufferedImage getImage();
+	public BufferedImage getImage() throws RemoteException;
 
-	public void setResolution(WebcamResolution dimension);
+	public void setResolution(WebcamResolution dimension) throws RemoteException;
 	}
 
