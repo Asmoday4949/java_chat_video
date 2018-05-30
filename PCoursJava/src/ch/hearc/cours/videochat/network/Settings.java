@@ -3,6 +3,7 @@ package ch.hearc.cours.videochat.network;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.net.UnknownHostException;
 import java.util.Map;
 
 import com.bilat.tools.reseau.rmi.NetworkTools;
@@ -168,6 +169,19 @@ public class Settings
 		return null;
 		}
 
+	public static InetAddress getByName(String host)
+		{
+		try
+			{
+			return InetAddress.getByName(host);
+			}
+		catch (UnknownHostException e)
+			{
+			e.printStackTrace();
+			}
+		return null;
+		}
+
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
@@ -182,7 +196,7 @@ public class Settings
 
 	public static final int PORT_CLIENT = RmiTools.PORT_RMI_DEFAUT;
 	public static final String ID_CLIENT = "CLIENT";
-	public static final InetAddress IP_CLIENT = RmiTools.getLocalHost();
+	public static final InetAddress IP_CLIENT = getByName("188.62.19.142");//RmiTools.getLocalHost();
 
 	/*------------------------------*\
 	|*			  Secret			*|

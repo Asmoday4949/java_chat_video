@@ -80,7 +80,6 @@ public class PCClient {
 			}
 		catch (RemoteException e)
 			{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			}
 		}
