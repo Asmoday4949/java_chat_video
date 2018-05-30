@@ -65,5 +65,6 @@ public class BoxChat extends Box
 	private JTextArea jTextAreaChat;
 	private BoxMessageInput boxMessageInput;
 
-	private Dimension JTEXTAREA_CHAT_SIZE = new Dimension(500, 300);
+	private static final Dimension JTEXTAREA_CHAT_SIZE = new Dimension(500, 300);
+
 	}

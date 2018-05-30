@@ -3,7 +3,6 @@ package ch.hearc.cours.videochat.network;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.net.UnknownHostException;
 import java.util.Map;
 
 import com.bilat.tools.reseau.rmi.NetworkTools;
@@ -11,46 +10,70 @@ import com.bilat.tools.reseau.rmi.RmiAddress;
 import com.bilat.tools.reseau.rmi.RmiID;
 import com.bilat.tools.reseau.rmi.RmiTools;
 
-public class Settings {
+public class Settings
+	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public static void init(RmiAddress rmiAddress, RmiID rmiID) {
-		Settings.rmiAddress = rmiAddress;
-		Settings.rmiID = rmiID;
-	}
+	private Settings()
+		{
+		//Rien
+		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	public static void init(RmiAddress rmiAddress, RmiID rmiID)
+		{
+		Settings.rmiAddress = rmiAddress;
+		Settings.rmiID = rmiID;
+		}
+
+	public static void init(String address)
+		{
+		RmiAddress rmiAddress = settings(address);
+		RmiID rmiID = new RmiID(ID_CLIENT, ID_SERVER);
+		init(rmiAddress, rmiID);
+		}
+
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
 
-	public RmiAddress getRmiAddress() {
+	public RmiAddress getRmiAddress()
+		{
 		return rmiAddress;
-	}
-
-	public RmiID getRmiID() {
-		return rmiID;
-	}
-
-	public Settings getInstance() {
-		if (instance == null) {
-			instance = new Settings();
 		}
+
+	public RmiID getRmiID()
+		{
+		return rmiID;
+		}
+
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+
+	public static Settings getInstance()
+		{
+		if (instance == null)
+			{
+			instance = new Settings();
+			}
 		return instance;
-	}
+		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
-	private static RmiAddress settings(String remote) {
-		try {
+	private static RmiAddress settings(String remote)
+		{
+		try
+			{
 			// RmiAddress contient 2 adresse, la locale et la remote
 			// La locale peut etre fausse si il y a plusieurs NetworkInterface, fausse dans
 			// le sens ou elle n'utilise peutetre pas le bon networkinterface
@@ -60,9 +83,10 @@ public class Settings {
 			String remoteAdress = "157.26.100.94";
 			RmiAddress rmiAdress = RmiAddress.create(remoteAdress); // si failed voir networkinterfaceChoice pour
 																	// specifier le networkinterface
-			if (rmiAdress == null) {
+			if (rmiAdress == null)
+				{
 				rmiAdress = networkinterfaceChoice(remoteAdress);
-			}
+				}
 
 			// 2 jvm, meme pc
 			// RmiAddress rmiAdress = RmiAddress.createLocal();
@@ -73,13 +97,15 @@ public class Settings {
 			return rmiAdress;
 
 			// RmiTools.setTimeout(5000);// experimentale
-		} catch (Exception e) {
+			}
+		catch (Exception e)
+			{
 			e.printStackTrace();
 			// ServiceGUI.getInstance().getServices().showError("Failed to launch
 			// application!");
-		}
+			}
 		return null;
-	}
+		}
 
 	/**
 	 * La locale adress peut poser problème! Attention a la spécifier lors du share
@@ -91,8 +117,10 @@ public class Settings {
 	 *
 	 * @param remoteAdress
 	 */
-	private static RmiAddress networkinterfaceChoice(String remote) {
-		try {
+	private static RmiAddress networkinterfaceChoice(String remote)
+		{
+		try
+			{
 			Map<NetworkInterface, InetAddress> mapNetworkAdress = NetworkTools.localhost();
 			System.out.println(mapNetworkAdress); // puis demander à l'utilisateur de le choisir
 
@@ -130,22 +158,15 @@ public class Settings {
 
 			return rmiAdress;
 
-		} catch (Exception e) {
+			}
+		catch (Exception e)
+			{
 			e.printStackTrace();
 			// ServiceGUI.getInstance().getServices().showError("Failed to launch
 			// application!");
-		}
+			}
 		return null;
-	}
-
-	public static InetAddress addressByName(String address) {
-		try {
-			return InetAddress.getByName(address);
-		} catch (UnknownHostException e) {
-			// Rien
 		}
-		return null;
-	}
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
@@ -177,4 +198,4 @@ public class Settings {
 
 	private static Settings instance;
 
-}
+	}
