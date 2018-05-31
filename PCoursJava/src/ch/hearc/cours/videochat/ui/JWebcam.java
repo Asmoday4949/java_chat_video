@@ -1,9 +1,11 @@
 
 package ch.hearc.cours.videochat.ui;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class JWebcam extends JPanel
@@ -31,6 +33,8 @@ public class JWebcam extends JPanel
 	public void setImage(BufferedImage bufferedImage)
 		{
 		this.bufferedImage = bufferedImage;
+
+		this.repaint();
 		}
 
 	/*------------------------------*\
@@ -41,22 +45,44 @@ public class JWebcam extends JPanel
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
+	@Override
+	protected void paintComponent(Graphics g)
+		{
+		super.paintComponent(g);
+
+		Graphics2D g2d = (Graphics2D)g;
+		AffineTransform transform = g2d.getTransform();
+
+		this.drawImageCenter(g2d);
+
+		g2d.setTransform(transform);
+		}
+
+	private void drawImageCenter(Graphics2D g2d)
+		{
+		if (bufferedImage != null)
+			{
+			int posX = this.getWidth()/2 - bufferedImage.getWidth()/2;
+			int posY = this.getHeight()/2 - bufferedImage.getHeight()/2;
+
+			System.out.println("cpasda");
+			g2d.drawImage(bufferedImage, 0, 0, bufferedImage.getWidth(), bufferedImage.getHeight(), null);
+			}
+		}
+
 	private void geometry()
 		{
-		// TODO Auto-generated method stub
 
 		}
 
 	private void control()
 		{
-		// TODO Auto-generated method stub
-
+		// rien
 		}
 
 	private void appearance()
 		{
-		// TODO Auto-generated method stub
-
+		// rien
 		}
 
 	/*------------------------------------------------------------------*\
@@ -64,5 +90,4 @@ public class JWebcam extends JPanel
 	\*------------------------------------------------------------------*/
 
 	private BufferedImage bufferedImage;
-	private JLabel jLabelImage;
 	}
