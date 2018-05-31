@@ -1,59 +1,37 @@
 
-package ch.hearc.cours.videochat.ui;
+package ch.hearc.cours.videochat.network;
 
-import java.awt.image.BufferedImage;
+import java.rmi.RemoteException;
 
-import ch.hearc.cours.videochat.network.RMIClient;
-import ch.hearc.cours.videochat.network.client.PCClient;
+import ch.hearc.cours.videochat.ui.ServiceGUI;
 import ch.hearc.cours.videochat.webcam.WebcamImage;
-import ch.hearc.cours.videochat.webcam.WebcamRemote;
 
-public class ServiceGUI
+public class Chat implements Chat_I
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	private ServiceGUI()
+	private Chat()
 		{
-		JFrameChat jFrameChat = new JFrameChat();
+		//Rien
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void writeImage(BufferedImage image)
+	@Override
+	public void writeImage(WebcamImage webcamImage) throws RemoteException
 		{
-		// TODO Auto-generated method stub
-
+		ServiceGUI.getInstance().writeImage(webcamImage.getImage());
 		}
 
-	public void writeMessage(String string)
+	@Override
+	public void writeMessage(Message message) throws RemoteException
 		{
-		// TODO Auto-generated method stub
-
-		}
-
-	public void connect(String nickname, String ip, int port)
-		{
-		WebcamImage webcam = WebcamImage.getInstance();
-		webcam.open();
-
-		//TODO Temporary for tests
-		if (nickname.equals(""))
-			{
-			//Server
-			RMIClient.getInstance();
-			WebcamRemote.getInstance();
-			}
-		else
-			{
-			//Client
-			PCClient.getInstance();
-			WebcamRemote.getInstance();
-			}
+		ServiceGUI.getInstance().writeMessage(message.getString());
 		}
 
 	/*------------------------------*\
@@ -64,15 +42,14 @@ public class ServiceGUI
 	|*				Get				*|
 	\*------------------------------*/
 
-	public static synchronized ServiceGUI getInstance()
+	public static synchronized Chat getInstance()
 		{
 		if (instance == null)
 			{
-			instance = new ServiceGUI();
+			instance = new Chat();
 			}
 		return instance;
 		}
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -85,6 +62,7 @@ public class ServiceGUI
 	|*			  Static			*|
 	\*------------------------------*/
 
-	private static ServiceGUI instance;
+	// Tools
+	private static Chat instance;
 
 	}

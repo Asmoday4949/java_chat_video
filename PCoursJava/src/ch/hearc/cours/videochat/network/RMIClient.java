@@ -1,25 +1,20 @@
 
-package ch.hearc.cours.videochat.network.server;
+package ch.hearc.cours.videochat.network;
 
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 
-import ch.hearc.cours.videochat.network.Settings;
-import ch.hearc.cours.videochat.webcam.WebcamImage;
-import ch.hearc.cours.videochat.webcam.WebcamRemote;
-import ch.hearc.cours.videochat.webcam.Webcam_I;
-
 import com.bilat.tools.reseau.rmi.RmiTools;
 import com.bilat.tools.reseau.rmi.RmiURL;
 
-public class PCServer
+public class RMIClient
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	private PCServer()
+	private RMIClient()
 		{
 		start();
 		}
@@ -36,11 +31,11 @@ public class PCServer
 	|*			  Static			*|
 	\*------------------------------*/
 
-	public synchronized static PCServer getInstance()
+	public synchronized static RMIClient getInstance()
 		{
 		if (instance == null)
 			{
-			instance = new PCServer();
+			instance = new RMIClient();
 			}
 
 		return instance;
@@ -59,26 +54,27 @@ public class PCServer
 	private void clientSide()
 		{
 		RmiURL url = new RmiURL(Settings.ID_CLIENT, Settings.IP_CLIENT, Settings.PORT_CLIENT);
-		Webcam_I webcamRemote;
+		Chat_I chatRemote;
 		try
 			{
-			webcamRemote = (Webcam_I)RmiTools.connectionRemoteObjectBloquant(url, 1000, 100);
-			work(webcamRemote);
+			chatRemote = (Chat_I)RmiTools.connectionRemoteObjectBloquant(url, 1000, 100);
+			work(chatRemote);
 			}
 		catch (RemoteException | MalformedURLException e)
 			{
-			System.err.println("[PCServer] : clientSide : Remote error!");
+			System.err.println("[RMIClient] : clientSide : Remote error!");
 			e.printStackTrace();
 			}
 		}
 
-	private void work(Webcam_I webcamRemote)
+	private void work(Chat_I chatRemote)
 		{
 		try
 			{
-			System.out.println(webcamRemote.getImage());
-			WebcamRemote.init(webcamRemote);
-			WebcamRemote.getInstance();
+			System.out.println(chatRemote);
+			ChatRemote.init(chatRemote);
+			ChatRemote.getInstance();
+			chatRemote.writeMessage(new Message("test"));
 			}
 		catch (RemoteException e)
 			{
@@ -90,13 +86,13 @@ public class PCServer
 		{
 		try
 			{
-			this.webcam = WebcamImage.getInstance();
-			RmiTools.shareObject(this.webcam, new RmiURL(Settings.ID_SERVER, Settings.PORT_SERVER));
+			this.chat = Chat.getInstance();
+			RmiTools.shareObject(this.chat, new RmiURL(Settings.ID_SERVER, Settings.PORT_SERVER));
 			}
 		catch (RemoteException | MalformedURLException e)
 			{
 			System.err.println(e);
-			System.err.println("[PCServer] : serverSide() : Impossible de partager l'objet Webcam : w");
+			System.err.println("[RMIClient] : serverSide() : Impossible de partager l'objet Webcam : w");
 			}
 		}
 
@@ -105,11 +101,11 @@ public class PCServer
 	\*------------------------------------------------------------------*/
 
 	//Tools
-	private WebcamImage webcam;
+	private Chat_I chat;
 
 	/*------------------------------*\
 	|*			  Static			*|
 	\*------------------------------*/
 
-	private static PCServer instance = null;
+	private static RMIClient instance = null;
 	}

@@ -1,58 +1,65 @@
 
-package ch.hearc.cours.videochat.ui;
+package ch.hearc.cours.videochat.network;
 
-import java.awt.image.BufferedImage;
+import java.rmi.RemoteException;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import ch.hearc.cours.videochat.network.RMIClient;
-import ch.hearc.cours.videochat.network.client.PCClient;
-import ch.hearc.cours.videochat.webcam.WebcamImage;
 import ch.hearc.cours.videochat.webcam.WebcamRemote;
+import ch.hearc.cours.videochat.webcam.WebcamService;
 
-public class ServiceGUI
+public class ServiceRMI
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	private ServiceGUI()
+	private ServiceRMI()
 		{
-		JFrameChat jFrameChat = new JFrameChat();
+		Chat.getInstance();
+		webcamRefresh = new Timer();
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void writeImage(BufferedImage image)
-		{
-		// TODO Auto-generated method stub
-
-		}
-
-	public void writeMessage(String string)
-		{
-		// TODO Auto-generated method stub
-
-		}
-
 	public void connect(String nickname, String ip, int port)
 		{
-		WebcamImage webcam = WebcamImage.getInstance();
-		webcam.open();
+		RMIClient.getInstance();
+		WebcamRemote.getInstance();
+		}
 
-		//TODO Temporary for tests
-		if (nickname.equals(""))
+	public void startSendWebcam()
+		{
+		webcamRefresh.schedule(new TimerTask()
 			{
-			//Server
-			RMIClient.getInstance();
-			WebcamRemote.getInstance();
+
+			@Override
+			public void run()
+				{
+				try
+					{
+					chatRemote.writeImage(WebcamService.getInstance().getImage());
+					}
+				catch (RemoteException e)
+					{
+					e.printStackTrace();
+					}
+				}
+			}, 500, 500);
+		}
+
+	public void writeMessage(String message)
+		{
+		try
+			{
+			chatRemote.writeMessage(new Message(message));
 			}
-		else
+		catch (RemoteException e)
 			{
-			//Client
-			PCClient.getInstance();
-			WebcamRemote.getInstance();
+			e.printStackTrace();
 			}
 		}
 
@@ -64,11 +71,11 @@ public class ServiceGUI
 	|*				Get				*|
 	\*------------------------------*/
 
-	public static synchronized ServiceGUI getInstance()
+	public static synchronized ServiceRMI getInstance()
 		{
 		if (instance == null)
 			{
-			instance = new ServiceGUI();
+			instance = new ServiceRMI();
 			}
 		return instance;
 		}
@@ -81,10 +88,13 @@ public class ServiceGUI
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
+	// Tools
+	private Chat_I chatRemote;
+	private Timer webcamRefresh;
+
 	/*------------------------------*\
 	|*			  Static			*|
 	\*------------------------------*/
 
-	private static ServiceGUI instance;
-
+	private static ServiceRMI instance;
 	}
