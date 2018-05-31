@@ -25,12 +25,14 @@ public class Chat implements Chat_I
 	@Override
 	public void writeImage(WebcamImage webcamImage) throws RemoteException
 		{
+		System.out.println("Write image code");
 		ServiceGUI.getInstance().writeImage(webcamImage.getImage());
 		}
 
 	@Override
 	public void writeMessage(Message message) throws RemoteException
 		{
+		System.out.println("Write message");
 		ServiceGUI.getInstance().writeMessage(message.getString());
 		}
 

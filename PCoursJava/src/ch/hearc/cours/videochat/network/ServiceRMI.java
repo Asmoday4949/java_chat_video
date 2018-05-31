@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import ch.hearc.cours.videochat.webcam.WebcamRemote;
 import ch.hearc.cours.videochat.webcam.WebcamService;
 
 public class ServiceRMI
@@ -30,7 +29,7 @@ public class ServiceRMI
 		Settings.init(ip);
 
 		RMIClient.getInstance();
-		WebcamRemote.getInstance();
+		ChatRemote.getInstance();
 		}
 
 	public void startSendWebcam()
