@@ -2,60 +2,36 @@
 package ch.hearc.cours.videochat.webcam;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Webcam implements Webcam_I
+import javax.imageio.ImageIO;
+
+public class WebcamImage implements Serializable, Webcam_I
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
-	private Webcam()
+	public WebcamImage()
 		{
-		this.webcamDevice = com.github.sarxos.webcam.Webcam.getDefault();
-		this.initWebcamResolution();
+		this.webcamImage = null;
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void open()
-	{
-	this.webcamDevice.open();
-	}
-
-	public void close()
-	{
-	this.webcamDevice.close();
-	}
-
-	/*------------------------------*\
-	|*			  Static			*|
-	\*------------------------------*/
-
-	private void initWebcamResolution()
-		{
-		this.webcamDevice.setCustomViewSizes(WebcamResolution.getAllDimensions());
-		}
-
-	public synchronized static Webcam getInstance()
-		{
-		if (instance == null)
-			{
-			instance = new Webcam();
-			}
-
-		return instance;
-		}
 
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
 
-	@Override
-	public void setResolution(WebcamResolution resolution)
+	public void setImage(BufferedImage image)
 		{
-		this.webcamDevice.setViewSize(resolution.getDimension());
+		this.webcamImage = image;
 		}
 
 	/*------------------------------*\
@@ -65,29 +41,31 @@ public class Webcam implements Webcam_I
 	@Override
 	public BufferedImage getImage()
 		{
-		if (this.webcamDevice.isOpen())
-			{
-			return this.webcamDevice.getImage();
-			}
-		else
-			{
-			return null;
-			}
+		return this.webcamImage;
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
+	/*------------------------------*\
+	|*		Serialisation			*|
+	\*------------------------------*/
+
+	private void writeObject(ObjectOutputStream out) throws IOException
+		{
+		ImageIO.write(this.webcamImage, "jpeg", out);
+		}
+
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
+		{
+		this.webcamImage = ImageIO.read(in);
+		}
+
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
-	private com.github.sarxos.webcam.Webcam webcamDevice;
+	private BufferedImage webcamImage;
 
-	/*------------------------------*\
-	|*			  Static			*|
-	\*------------------------------*/
-
-	private static Webcam instance = null;
 	}

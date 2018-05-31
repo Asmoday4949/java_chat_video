@@ -196,7 +196,7 @@ public class Settings
 
 	public static final int PORT_CLIENT = RmiTools.PORT_RMI_DEFAUT;
 	public static final String ID_CLIENT = "SERVER";
-	public static final InetAddress IP_CLIENT = getByName("157.26.107.61");//RmiTools.getLocalHost();
+	public static final InetAddress IP_CLIENT = getByName("157.26.105.79");//RmiTools.getLocalHost();
 
 	/*------------------------------*\
 	|*			  Secret			*|
