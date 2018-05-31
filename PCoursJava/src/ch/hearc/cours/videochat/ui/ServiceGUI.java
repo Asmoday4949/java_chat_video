@@ -3,10 +3,8 @@ package ch.hearc.cours.videochat.ui;
 
 import java.awt.image.BufferedImage;
 
-import ch.hearc.cours.videochat.network.RMIClient;
-import ch.hearc.cours.videochat.network.client.PCClient;
+import ch.hearc.cours.videochat.network.ServiceRMI;
 import ch.hearc.cours.videochat.webcam.WebcamImage;
-import ch.hearc.cours.videochat.webcam.WebcamRemote;
 
 public class ServiceGUI
 	{
@@ -41,19 +39,7 @@ public class ServiceGUI
 		WebcamImage webcam = WebcamImage.getInstance();
 		webcam.open();
 
-		//TODO Temporary for tests
-		if (nickname.equals(""))
-			{
-			//Server
-			RMIClient.getInstance();
-			WebcamRemote.getInstance();
-			}
-		else
-			{
-			//Client
-			PCClient.getInstance();
-			WebcamRemote.getInstance();
-			}
+		ServiceRMI.getInstance().connect(nickname, ip, port);
 		}
 
 	/*------------------------------*\
