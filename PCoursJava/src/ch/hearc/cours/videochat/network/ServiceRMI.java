@@ -33,6 +33,8 @@ public class ServiceRMI
 
 	public void startSendWebcam()
 		{
+		webcamRefresh.cancel();
+		webcamRefresh.purge();
 		webcamRefresh.schedule(new TimerTask()
 			{
 
@@ -49,6 +51,12 @@ public class ServiceRMI
 					}
 				}
 			}, 500, 500);
+		}
+
+	public void stopSendWebcam()
+		{
+		webcamRefresh.cancel();
+		webcamRefresh.purge();
 		}
 
 	public void writeMessage(String message)
