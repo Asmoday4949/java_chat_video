@@ -1,7 +1,7 @@
 
 package ch.hearc.cours.videochat.webcam;
 
-import ch.hearc.cours.gui.tools.JFrameComponent;
+import ch.hearc.cours.tools.gui.JFrameComponent;
 
 public class UseTestWebcam
 	{
