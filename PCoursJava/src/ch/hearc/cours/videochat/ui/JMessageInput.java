@@ -1,3 +1,4 @@
+
 package ch.hearc.cours.videochat.ui;
 
 import javax.swing.Box;
@@ -32,6 +33,11 @@ public class JMessageInput extends Box
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
+
+	public String getInput()
+		{
+		return this.jTextFieldMessageInput.getText();
+		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
@@ -69,5 +75,3 @@ public class JMessageInput extends Box
 
 	private static final int SPACE_WIDTH = 30;
 	}
-
-

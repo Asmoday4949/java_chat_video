@@ -13,7 +13,7 @@ public class ServiceGUI
 
 	private ServiceGUI()
 		{
-		JFrameChat jFrameChat = new JFrameChat();
+		jFrameChat = new JFrameChat();
 		}
 
 	/*------------------------------------------------------------------*\
@@ -22,12 +22,12 @@ public class ServiceGUI
 
 	public void writeImage(BufferedImage image)
 		{
-		// TODO Auto-generated method stub
-
+		jFrameChat.getMain().getJWebcam().setImage(image);
 		}
 
 	public void writeMessage(String message)
 		{
+		jFrameChat.getMain().getJChat().appendText(message);
 		System.out.println(message);
 		}
 
@@ -37,6 +37,7 @@ public class ServiceGUI
 		//		webcam.open();
 
 		ServiceRMI.getInstance().connect(nickname, ip, port);
+		ServiceRMI.getInstance().startSendWebcam();
 		}
 
 	public void sendMessage(String message)
@@ -73,6 +74,7 @@ public class ServiceGUI
 	|*			  Static			*|
 	\*------------------------------*/
 
+	private JFrameChat jFrameChat;
 	private static ServiceGUI instance;
 
 	}
