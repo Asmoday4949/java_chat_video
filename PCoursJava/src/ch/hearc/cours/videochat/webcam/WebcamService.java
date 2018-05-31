@@ -1,17 +1,18 @@
 
 package ch.hearc.cours.videochat.webcam;
 
-import java.awt.image.BufferedImage;
-
-public class Webcam implements Webcam_I
+public class WebcamService
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
-	private Webcam()
+
+	public WebcamService()
 		{
 		this.webcamDevice = com.github.sarxos.webcam.Webcam.getDefault();
+		this.image = new WebcamImage();
+
 		this.initWebcamResolution();
 		}
 
@@ -20,29 +21,36 @@ public class Webcam implements Webcam_I
 	\*------------------------------------------------------------------*/
 
 	public void open()
-	{
-	this.webcamDevice.open();
-	}
+		{
+		this.webcamDevice.open();
+		}
 
 	public void close()
-	{
-	this.webcamDevice.close();
-	}
+		{
+		this.webcamDevice.close();
+		}
+
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+
+	public WebcamImage getImage()
+		{
+		this.setWebcamImage();
+		return this.image;
+		}
 
 	/*------------------------------*\
 	|*			  Static			*|
 	\*------------------------------*/
 
-	private void initWebcamResolution()
-		{
-		this.webcamDevice.setCustomViewSizes(WebcamResolution.getAllDimensions());
-		}
-
-	public synchronized static Webcam getInstance()
+	public synchronized static WebcamService getInstance()
 		{
 		if (instance == null)
 			{
-			instance = new Webcam();
+			instance = new WebcamService();
 			}
 
 		return instance;
@@ -52,42 +60,32 @@ public class Webcam implements Webcam_I
 	|*				Set				*|
 	\*------------------------------*/
 
-	@Override
 	public void setResolution(WebcamResolution resolution)
 		{
 		this.webcamDevice.setViewSize(resolution.getDimension());
 		}
 
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
-
-	@Override
-	public BufferedImage getImage()
-		{
-		if (this.webcamDevice.isOpen())
-			{
-			return this.webcamDevice.getImage();
-			}
-		else
-			{
-			return null;
-			}
-		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
+
+	private void initWebcamResolution()
+		{
+		this.webcamDevice.setCustomViewSizes(WebcamResolution.getAllDimensions());
+		}
+
+	private void setWebcamImage()
+		{
+		this.image.setImage(this.webcamDevice.getImage());
+		}
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
 	private com.github.sarxos.webcam.Webcam webcamDevice;
+	private WebcamImage image;
 
-	/*------------------------------*\
-	|*			  Static			*|
-	\*------------------------------*/
-
-	private static Webcam instance = null;
+	private static WebcamService instance = null;
 	}

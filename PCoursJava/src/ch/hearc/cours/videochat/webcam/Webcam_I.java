@@ -9,7 +9,5 @@ import java.rmi.RemoteException;
 public interface Webcam_I extends Remote
 	{
 	public BufferedImage getImage() throws RemoteException;
-
-	public void setResolution(WebcamResolution dimension) throws RemoteException;
 	}
 

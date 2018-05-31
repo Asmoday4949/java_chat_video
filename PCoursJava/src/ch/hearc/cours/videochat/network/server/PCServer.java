@@ -5,7 +5,7 @@ import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 
 import ch.hearc.cours.videochat.network.Settings;
-import ch.hearc.cours.videochat.webcam.Webcam;
+import ch.hearc.cours.videochat.webcam.WebcamImage;
 import ch.hearc.cours.videochat.webcam.WebcamRemote;
 import ch.hearc.cours.videochat.webcam.Webcam_I;
 
@@ -91,7 +91,7 @@ public class PCServer
 		{
 		try
 			{
-			this.webcam = Webcam.getInstance();
+			this.webcam = WebcamImage.getInstance();
 			RmiTools.shareObject(this.webcam, new RmiURL(Settings.ID_SERVER, Settings.PORT_SERVER));
 			}
 		catch (RemoteException | MalformedURLException e)
@@ -106,7 +106,7 @@ public class PCServer
 	\*------------------------------------------------------------------*/
 
 	//Tools
-	private Webcam webcam;
+	private WebcamImage webcam;
 
 	/*------------------------------*\
 	|*			  Static			*|
