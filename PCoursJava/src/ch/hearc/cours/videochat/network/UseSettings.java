@@ -14,13 +14,19 @@ public class UseSettings
 
 	public static void main()
 		{
-		Settings.init("localhost");
 		Settings settings = Settings.getInstance();
+		Settings.init("157.26.105.136");
+		try
+			{
+			System.out.println(settings.getLocal());
+			System.out.println(settings.getRemote());
+			}
+		catch (IndexOutOfBoundsException e)
+			{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
 
-		System.out.println("RMI ADDRESS");
-		System.out.println(settings.getRmiAddress());
-		System.out.println("RMI ID");
-		System.out.println(settings.getRmiID());
 		}
 
 	/*------------------------------------------------------------------*\

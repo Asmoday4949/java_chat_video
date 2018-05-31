@@ -1,3 +1,4 @@
+
 package ch.hearc.cours.videochat.ui;
 
 import java.awt.BorderLayout;
@@ -29,6 +30,11 @@ public class JFrameChat extends JFrame
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
+
+	public JMain getMain()
+		{
+		return this.jPanelMain;
+		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|

@@ -20,7 +20,8 @@ public class Settings
 
 	private Settings()
 		{
-		//Rien
+		localAddress = RmiAddress.createLocal().getLocal();
+		System.setProperty("java.rmi.server.hostname", localAddress.getHostAddress()); // Patch linux: ip of localhost
 		}
 
 	/*------------------------------------------------------------------*\
@@ -30,28 +31,38 @@ public class Settings
 	public static void init(RmiAddress rmiAddress, RmiID rmiID)
 		{
 		Settings.rmiAddress = rmiAddress;
-		Settings.rmiID = rmiID;
+		//Settings.rmiID = rmiID;
 		}
 
 	public static void init(String address)
 		{
-		RmiAddress rmiAddress = settings(address);
-		RmiID rmiID = new RmiID(ID_CLIENT, ID_SERVER);
-		init(rmiAddress, rmiID);
+		//try
+			{
+			//System.out.println(RmiAddress.create(address));
+			//remoteAddress = RmiAddress.create(address).getRemote();
+			remoteAddress = getByName(address);
+			}
+		//catch (IndexOutOfBoundsException | SocketException | UnknownHostException e)
+			{
+			//e.printStackTrace();
+			}
+//		RmiAddress rmiAddress = settings(address);
+//		RmiID rmiID = new RmiID(ID_CLIENT, ID_SERVER);
+//		init(rmiAddress, rmiID);
 		}
 
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
 
-	public RmiAddress getRmiAddress()
+	public InetAddress getLocal()
 		{
-		return rmiAddress;
+		return localAddress;
 		}
 
-	public RmiID getRmiID()
+	public InetAddress getRemote()
 		{
-		return rmiID;
+		return remoteAddress;
 		}
 
 	/*------------------------------*\
@@ -147,8 +158,9 @@ public class Settings
 			//
 
 			// distant : true ip auto
-			InetAddress localAdress = NetworkTools.localhostEth().get(0);
 			InetAddress remoteAdress = InetAddress.getByName(remote);
+
+			InetAddress localAdress = NetworkTools.localhostEth().get(0);
 			RmiAddress rmiAdress = new RmiAddress(localAdress, remoteAdress);
 
 			System.setProperty("java.rmi.server.hostname", localAdress.getHostAddress()); // Patch linux: ip of
@@ -163,8 +175,7 @@ public class Settings
 		catch (Exception e)
 			{
 			e.printStackTrace();
-			// ServiceGUI.getInstance().getServices().showError("Failed to launch
-			// application!");
+			// ServiceGUI.getInstance().getServices().showError("Failed to launch application!");
 			}
 		return null;
 		}
@@ -188,28 +199,16 @@ public class Settings
 
 	// Output
 	private static RmiAddress rmiAddress;
-	private static RmiID rmiID;
-
-	/*------------------------------*\
-	|*			  Horloge			*|
-	\*------------------------------*/
-
-	public static final int PORT_CLIENT = RmiTools.PORT_RMI_DEFAUT;
-	public static final String ID_CLIENT = "SERVER";
-	public static final InetAddress IP_CLIENT = getByName("157.26.105.79");//RmiTools.getLocalHost();
-
-	/*------------------------------*\
-	|*			  Secret			*|
-	\*------------------------------*/
-
-	public static final int PORT_SERVER = RmiTools.PORT_RMI_DEFAUT;
-	public static final String ID_SERVER = "SERVER";
-	public static final InetAddress IP_SERVER = RmiTools.getLocalHost();
+	private static InetAddress localAddress;
+	private static InetAddress remoteAddress;
 
 	/*------------------------------*\
 	|*			  Static			*|
 	\*------------------------------*/
 
 	private static Settings instance;
+
+	public static final int PORT_CHAT = RmiTools.PORT_RMI_DEFAUT;
+	public static final String ID_CHAT = "CHAT";
 
 	}
