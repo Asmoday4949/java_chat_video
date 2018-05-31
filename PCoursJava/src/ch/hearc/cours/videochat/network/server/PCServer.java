@@ -90,7 +90,7 @@ public class PCServer
 		{
 		try
 			{
-			this.webcam = WebcamImage.getInstance();
+			//this.webcam = WebcamImage.getInstance();
 			RmiTools.shareObject(this.webcam, new RmiURL(Settings.ID_SERVER, Settings.PORT_SERVER));
 			}
 		catch (RemoteException | MalformedURLException e)
