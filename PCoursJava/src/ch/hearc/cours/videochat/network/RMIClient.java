@@ -87,12 +87,13 @@ public class RMIClient
 		try
 			{
 			this.chat = Chat.getInstance();
-			RmiTools.shareObject(this.chat, new RmiURL(Settings.ID_CHAT, Settings.getInstance().getLocal(), Settings.PORT_CHAT));
+			System.out.println(Settings.getInstance().getLocal());
+			RmiTools.shareObject(this.chat, new RmiURL(Settings.ID_CHAT, Settings.PORT_CHAT));
 			}
 		catch (RemoteException | MalformedURLException e)
 			{
-			System.err.println(e);
-			System.err.println("[RMIClient] : serverSide() : Impossible de partager l'objet Webcam : w");
+			e.printStackTrace();
+			System.err.println("[RMIClient] : serverSide() : Impossible de partager l'objet Chat : c");
 			}
 		}
 

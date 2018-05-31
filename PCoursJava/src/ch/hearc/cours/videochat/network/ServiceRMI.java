@@ -44,7 +44,7 @@ public class ServiceRMI
 				{
 				try
 					{
-					chatRemote.writeImage(WebcamService.getInstance().getImage());
+					ChatRemote.getInstance().getChat().writeImage(WebcamService.getInstance().getImage());
 					}
 				catch (RemoteException e)
 					{
@@ -64,7 +64,7 @@ public class ServiceRMI
 		{
 		try
 			{
-			chatRemote.writeMessage(new Message(message));
+			ChatRemote.getInstance().getChat().writeMessage(new Message(message));
 			}
 		catch (RemoteException e)
 			{
@@ -98,7 +98,6 @@ public class ServiceRMI
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private Chat_I chatRemote;
 	private Timer webcamRefresh;
 
 	/*------------------------------*\
