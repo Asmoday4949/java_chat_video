@@ -38,7 +38,7 @@ public class ServiceGUI
 //		WebcamImage webcam = WebcamImage.getInstance();
 //		webcam.open();
 
-		ServiceRMI.getInstance().connect(nickname, ip, port);
+		ServiceRMI.getInstance().connect(ip, port);
 		}
 
 	/*------------------------------*\

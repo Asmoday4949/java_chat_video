@@ -53,7 +53,7 @@ public class RMIClient
 
 	private void clientSide()
 		{
-		RmiURL url = new RmiURL(Settings.ID_CLIENT, Settings.IP_CLIENT, Settings.PORT_CLIENT);
+		RmiURL url = new RmiURL(Settings.ID_CHAT, Settings.getInstance().getRemote(), Settings.PORT_CHAT);
 		Chat_I chatRemote;
 		try
 			{
@@ -87,7 +87,7 @@ public class RMIClient
 		try
 			{
 			this.chat = Chat.getInstance();
-			RmiTools.shareObject(this.chat, new RmiURL(Settings.ID_SERVER, Settings.PORT_SERVER));
+			RmiTools.shareObject(this.chat, new RmiURL(Settings.ID_CHAT, Settings.getInstance().getLocal(), Settings.PORT_CHAT));
 			}
 		catch (RemoteException | MalformedURLException e)
 			{

@@ -25,8 +25,10 @@ public class ServiceRMI
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void connect(String nickname, String ip, int port)
+	public void connect(String ip, int port)
 		{
+		Settings.init(ip);
+
 		RMIClient.getInstance();
 		WebcamRemote.getInstance();
 		}
@@ -105,4 +107,5 @@ public class ServiceRMI
 	\*------------------------------*/
 
 	private static ServiceRMI instance;
+
 	}
