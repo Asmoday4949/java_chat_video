@@ -2,65 +2,36 @@
 package ch.hearc.cours.videochat.network;
 
 import java.rmi.RemoteException;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import ch.hearc.cours.videochat.webcam.WebcamRemote;
-import ch.hearc.cours.videochat.webcam.WebcamService;
+import ch.hearc.cours.videochat.ui.ServiceGUI;
+import ch.hearc.cours.videochat.webcam.WebcamImage;
 
-public class ServiceRMI
+public class Chat implements Chat_I
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	private ServiceRMI()
+	private Chat()
 		{
-		Chat.getInstance();
-		webcamRefresh = new Timer();
+		//Rien
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void connect(String nickname, String ip, int port)
+	@Override
+	public void writeImage(WebcamImage webcamImage) throws RemoteException
 		{
-		RMIClient.getInstance();
-		WebcamRemote.getInstance();
+		ServiceGUI.getInstance().writeImage(webcamImage.getImage());
 		}
 
-	public void startSendWebcam()
+	@Override
+	public void writeMessage(Message message) throws RemoteException
 		{
-		webcamRefresh.schedule(new TimerTask()
-			{
-
-			@Override
-			public void run()
-				{
-				try
-					{
-					chatRemote.writeImage(WebcamService.getInstance().getImage());
-					}
-				catch (RemoteException e)
-					{
-					e.printStackTrace();
-					}
-				}
-			}, 500, 500);
-		}
-
-	public void writeMessage(String message)
-		{
-		try
-			{
-			chatRemote.writeMessage(new Message(message));
-			}
-		catch (RemoteException e)
-			{
-			e.printStackTrace();
-			}
+		ServiceGUI.getInstance().writeMessage(message.getString());
 		}
 
 	/*------------------------------*\
@@ -71,15 +42,14 @@ public class ServiceRMI
 	|*				Get				*|
 	\*------------------------------*/
 
-	public static synchronized ServiceRMI getInstance()
+	public static synchronized Chat getInstance()
 		{
 		if (instance == null)
 			{
-			instance = new ServiceRMI();
+			instance = new Chat();
 			}
 		return instance;
 		}
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -88,13 +58,11 @@ public class ServiceRMI
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
-	// Tools
-	private Chat_I chatRemote;
-	private Timer webcamRefresh;
-
 	/*------------------------------*\
 	|*			  Static			*|
 	\*------------------------------*/
 
-	private static ServiceRMI instance;
+	// Tools
+	private static Chat instance;
+
 	}
