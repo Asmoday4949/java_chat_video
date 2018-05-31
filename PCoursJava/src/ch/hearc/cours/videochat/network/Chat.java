@@ -1,27 +1,38 @@
 
-package ch.hearc.cours.videochat.ui;
+package ch.hearc.cours.videochat.network;
 
-import java.awt.BorderLayout;
+import java.rmi.RemoteException;
 
-import javax.swing.JPanel;
+import ch.hearc.cours.videochat.ui.ServiceGUI;
+import ch.hearc.cours.videochat.webcam.WebcamImage;
 
-public class JMain extends JPanel
+public class Chat implements Chat_I
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JMain()
+	private Chat()
 		{
-		geometry();
-		control();
-		appearance();
+		//Rien
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+
+	@Override
+	public void writeImage(WebcamImage webcamImage) throws RemoteException
+		{
+		ServiceGUI.getInstance().writeImage(webcamImage.getImage());
+		}
+
+	@Override
+	public void writeMessage(Message message) throws RemoteException
+		{
+		ServiceGUI.getInstance().writeMessage(message.getString());
+		}
 
 	/*------------------------------*\
 	|*				Set				*|
@@ -31,43 +42,27 @@ public class JMain extends JPanel
 	|*				Get				*|
 	\*------------------------------*/
 
+	public static synchronized Chat getInstance()
+		{
+		if (instance == null)
+			{
+			instance = new Chat();
+			}
+		return instance;
+		}
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
-
-	private void geometry()
-		{
-		// JComponent : Instanciation
-		boxConnection = new JConnection();
-		jWebcam = new JWebcam();
-		boxChat = new JChat();
-
-		// Layout : Specification
-		setLayout(new BorderLayout());
-
-		// JComponent : add
-		this.add(boxConnection, BorderLayout.NORTH);
-		this.add(jWebcam, BorderLayout.CENTER);
-		this.add(boxChat, BorderLayout.SOUTH);
-		}
-
-	private void control()
-		{
-		// rien
-		}
-
-	private void appearance()
-		{
-		// rien
-		}
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+
 	// Tools
-	private JConnection boxConnection;
-	private JWebcam jWebcam;
-	private JChat boxChat;
+	private static Chat instance;
 
 	}

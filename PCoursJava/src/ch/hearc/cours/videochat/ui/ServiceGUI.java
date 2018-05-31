@@ -1,16 +1,14 @@
 
 package ch.hearc.cours.videochat.ui;
 
+import java.awt.image.BufferedImage;
+
+import ch.hearc.cours.videochat.network.RMIClient;
 import ch.hearc.cours.videochat.network.client.PCClient;
-import ch.hearc.cours.videochat.network.server.PCServer;
 import ch.hearc.cours.videochat.webcam.WebcamRemote;
 
 public class ServiceGUI
-	{
-
-	/*------------------------------------------------------------------*\
-	|*							Constructeurs							*|
-	\*------------------------------------------------------------------*/
+{
 
 	private ServiceGUI()
 		{
@@ -21,6 +19,18 @@ public class ServiceGUI
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	public void writeImage(BufferedImage image)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	public void writeMessage(String string)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
 	public void connect(String nickname, String ip, int port)
 		{
 //		WebcamImage webcam = WebcamImage.getInstance();
@@ -30,7 +40,7 @@ public class ServiceGUI
 		if (nickname.equals(""))
 			{
 			//Server
-			PCServer.getInstance();
+			RMIClient.getInstance();
 			WebcamRemote.getInstance();
 			}
 		else
@@ -71,4 +81,5 @@ public class ServiceGUI
 	\*------------------------------*/
 
 	private static ServiceGUI instance;
+
 	}
