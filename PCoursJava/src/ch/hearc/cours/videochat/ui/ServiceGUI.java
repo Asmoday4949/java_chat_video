@@ -6,11 +6,10 @@ import java.awt.image.BufferedImage;
 import ch.hearc.cours.videochat.network.ServiceRMI;
 
 public class ServiceGUI
-{
+	{
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
-
 
 	private ServiceGUI()
 		{
@@ -27,18 +26,22 @@ public class ServiceGUI
 
 		}
 
-	public void writeMessage(String string)
+	public void writeMessage(String message)
 		{
-		// TODO Auto-generated method stub
-
+		System.out.println(message);
 		}
 
 	public void connect(String nickname, String ip, int port)
 		{
-//		WebcamImage webcam = WebcamImage.getInstance();
-//		webcam.open();
+		//		WebcamImage webcam = WebcamImage.getInstance();
+		//		webcam.open();
 
 		ServiceRMI.getInstance().connect(nickname, ip, port);
+		}
+
+	public void sendMessage(String message)
+		{
+		ServiceRMI.getInstance().writeMessage(message);
 		}
 
 	/*------------------------------*\
