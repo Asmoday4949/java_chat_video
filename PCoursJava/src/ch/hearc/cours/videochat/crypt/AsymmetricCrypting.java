@@ -44,15 +44,14 @@ public class AsymmetricCrypting implements Crypting_I
 	\*------------------------------------------------------------------*/
 
 	@Override
-	public byte[] encrypt(byte[] data, PublicKey key) throws InvalidKeyException
+	public String encrypt(String stringToCrypt, PublicKey key) throws InvalidKeyException
 		{
-		Cipher cipher;
 		try
 			{
-			cipher = Cipher.getInstance("RSA");
+			Cipher cipher = Cipher.getInstance("RSA");
 			cipher.init(Cipher.ENCRYPT_MODE, publicKey);
 
-			return cipher.doFinal(data);
+			return cipher.doFinal(stringToCrypt.getBytes()).toString();
 			}
 		catch (NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException e)
 			{
@@ -64,15 +63,14 @@ public class AsymmetricCrypting implements Crypting_I
 		}
 
 	@Override
-	public byte[] decrypt(byte[] encryptedData)
+	public String decrypt(String encryptedString)
 		{
-		Cipher cipher;
 		try
 			{
-			cipher = Cipher.getInstance("RSA");
+			Cipher cipher = Cipher.getInstance("RSA");
 			cipher.init(Cipher.DECRYPT_MODE, this.privateKey);
 
-			return cipher.doFinal(encryptedData);
+			return cipher.doFinal(encryptedString.getBytes()).toString();
 
 			}
 		catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException e)
@@ -93,10 +91,30 @@ public class AsymmetricCrypting implements Crypting_I
 		return this.publicKey;
 		}
 
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+
+	public static AsymmetricCrypting getInstance()
+		{
+		if(instance == null)
+			{
+			instance = new AsymmetricCrypting();
+			}
+
+		return instance;
+		}
+
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
 	private PrivateKey privateKey;
 	private PublicKey publicKey;
+
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+
+	private static AsymmetricCrypting instance = null;
 	}

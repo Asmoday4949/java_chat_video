@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.security.InvalidKeyException;
+
+import ch.hearc.cours.videochat.crypt.CryptingFactory;
+import ch.hearc.cours.videochat.crypt.Crypting_I;
 
 public class Message implements Serializable
 	{
@@ -42,26 +46,26 @@ public class Message implements Serializable
 	private void writeObject(ObjectOutputStream out) throws IOException
 		{
 		System.out.println("[Message]:writeObject : Serialization custom");
-		out.writeObject(crypt(message));
+		Crypting_I crypting = CryptingFactory.createCrypting();
+
+		try
+			{
+			out.writeObject(crypting.encrypt(message, null));
+			}
+		catch (InvalidKeyException e)
+			{
+			e.printStackTrace();
+			}
 		}
 
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
 		{
+		Crypting_I crypting = CryptingFactory.createCrypting();
+
 		System.out.println("[Message]:readObject : Deserialization custom");
-		message = decrypt((String)in.readObject());
+		message = crypting.decrypt((String)in.readObject());
 		}
 
-	private static String crypt(String data)
-		{
-		//TODO faire un algorithme de cryptage plus subtile
-		return data+"x";
-		}
-
-	private static String decrypt(String data)
-		{
-		//TODO faire un algorithme de cryptage plus subtile
-		return data.substring(0, data.length()-1);
-		}
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
