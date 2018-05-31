@@ -76,9 +76,10 @@ public class PCServer
 		{
 		try
 			{
-			System.out.println(webcamRemote.getImage());
+			System.out.println(webcamRemote);
 			WebcamRemote.init(webcamRemote);
 			WebcamRemote.getInstance();
+			System.out.println(webcamRemote.getImage());
 			}
 		catch (RemoteException e)
 			{
