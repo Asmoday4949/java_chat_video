@@ -1,6 +1,9 @@
 
 package ch.hearc.cours.videochat.ui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -55,10 +58,21 @@ public class JMessageInput extends Box
 
 	private void control()
 		{
+		ActionListener actionListener = new ActionListener()
+					{
+						@Override
+						public void actionPerformed(ActionEvent event)
+							{
+							ServiceGUI.getInstance().sendMessage(jTextFieldMessageInput.getText());
+							}
+					};
+
+		jButtonSend.addActionListener(actionListener);
 		}
 
 	private void appearance()
 		{
+		// rien
 		}
 
 	/*------------------------------------------------------------------*\
