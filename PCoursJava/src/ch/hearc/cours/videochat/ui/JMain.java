@@ -31,6 +31,16 @@ public class JMain extends JPanel
 	|*				Get				*|
 	\*------------------------------*/
 
+	public JWebcam getJWebcam()
+		{
+		return this.jWebcam;
+		}
+
+	public JChat getJChat()
+		{
+		return boxChat;
+		}
+
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/

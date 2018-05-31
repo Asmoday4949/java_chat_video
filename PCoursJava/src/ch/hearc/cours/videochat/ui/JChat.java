@@ -1,3 +1,4 @@
+
 package ch.hearc.cours.videochat.ui;
 
 import java.awt.Dimension;
@@ -26,6 +27,11 @@ public class JChat extends Box
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	public void appendText(String message)
+		{
+		this.jTextAreaChat.append(message);
+		}
+
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
@@ -33,6 +39,11 @@ public class JChat extends Box
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
+
+	public String getMessageInput()
+		{
+		return boxMessageInput.getInput();
+		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|

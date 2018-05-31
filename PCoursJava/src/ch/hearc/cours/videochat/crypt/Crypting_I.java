@@ -6,10 +6,9 @@ import java.security.PublicKey;
 
 public interface Crypting_I
 	{
-	public byte[] encrypt(byte[] data, PublicKey key) throws InvalidKeyException;
+	public String encrypt(String stringToCrypt, PublicKey key) throws InvalidKeyException;
 
-	public byte[] decrypt(byte[] data);
+	public String decrypt(String encryptedString);
 
-	PublicKey getPublicKey();
-
+	public PublicKey getPublicKey();
 	}

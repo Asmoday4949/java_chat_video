@@ -1,7 +1,6 @@
 
 package ch.hearc.cours.videochat.crypt;
 
-import java.security.InvalidKeyException;
 import java.security.PublicKey;
 
 public class DumbCrypting implements Crypting_I
@@ -12,21 +11,15 @@ public class DumbCrypting implements Crypting_I
 	\*------------------------------------------------------------------*/
 
 	@Override
-	public byte[] encrypt(byte[] data, PublicKey key) throws InvalidKeyException
+	public String encrypt(String stringToCrypt, PublicKey key)
 		{
-		byte[] encryptedData = new byte[data.length];
-
-
-
-		return null;
+		return stringToCrypt + " IT IS SAFELY CRYPTED";
 		}
 
 	@Override
-	public byte[] decrypt(byte[] data)
+	public String decrypt(String encryptedString)
 		{
-
-
-		return null;
+		return encryptedString.substring(0, encryptedString.length() - 20);
 		}
 
 	/*------------------------------*\
@@ -38,11 +31,4 @@ public class DumbCrypting implements Crypting_I
 		{
 		return null; // no public key in dumb crypting
 		}
-
-
-	/*------------------------------------------------------------------*\
-	|*							Methodes Private						*|
-	\*------------------------------------------------------------------*/
-
 	}
-
