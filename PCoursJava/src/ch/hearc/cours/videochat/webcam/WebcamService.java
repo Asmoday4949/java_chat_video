@@ -1,6 +1,8 @@
 
 package ch.hearc.cours.videochat.webcam;
 
+import com.github.sarxos.webcam.Webcam;
+
 public class WebcamService
 	{
 
@@ -8,7 +10,7 @@ public class WebcamService
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public WebcamService()
+	private WebcamService()
 		{
 		this.webcamDevice = com.github.sarxos.webcam.Webcam.getDefault();
 		this.image = new WebcamImage();
@@ -30,11 +32,9 @@ public class WebcamService
 		this.webcamDevice.close();
 		}
 
-
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
-
 
 	public WebcamImage getImage()
 		{
@@ -65,7 +65,6 @@ public class WebcamService
 		this.webcamDevice.setViewSize(resolution.getDimension());
 		}
 
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -84,8 +83,14 @@ public class WebcamService
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
-	private com.github.sarxos.webcam.Webcam webcamDevice;
+	// Tools
+	private Webcam webcamDevice;
 	private WebcamImage image;
 
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+
 	private static WebcamService instance = null;
+
 	}

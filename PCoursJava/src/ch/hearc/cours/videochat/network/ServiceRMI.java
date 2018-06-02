@@ -36,6 +36,7 @@ public class ServiceRMI
 		{
 		webcamRefresh.cancel();
 		webcamRefresh.purge();
+		webcamRefresh = new Timer();
 		webcamRefresh.schedule(new TimerTask()
 			{
 
