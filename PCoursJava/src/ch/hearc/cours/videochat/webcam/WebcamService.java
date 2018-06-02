@@ -1,6 +1,8 @@
 
 package ch.hearc.cours.videochat.webcam;
 
+import org.junit.Assert;
+
 import com.github.sarxos.webcam.Webcam;
 
 public class WebcamService
@@ -13,7 +15,6 @@ public class WebcamService
 	private WebcamService()
 		{
 		this.webcamDevice = com.github.sarxos.webcam.Webcam.getDefault();
-		this.image = new WebcamImage();
 
 		this.initWebcamResolution();
 		}
@@ -38,8 +39,8 @@ public class WebcamService
 
 	public WebcamImage getImage()
 		{
-		this.setWebcamImage();
-		return this.image;
+		Assert.assertTrue(this.webcamDevice.isOpen());
+		return new WebcamImage(this.webcamDevice.getImage());
 		}
 
 	/*------------------------------*\
@@ -65,6 +66,15 @@ public class WebcamService
 		this.webcamDevice.setViewSize(resolution.getDimension());
 		}
 
+	/*------------------------------*\
+	|*				Is				*|
+	\*------------------------------*/
+
+	public boolean isOpen()
+		{
+		return this.webcamDevice.isOpen();
+		}
+
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -74,18 +84,12 @@ public class WebcamService
 		this.webcamDevice.setCustomViewSizes(WebcamResolution.getAllDimensions());
 		}
 
-	private void setWebcamImage()
-		{
-		this.image.setImage(this.webcamDevice.getImage());
-		}
-
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
 	// Tools
 	private Webcam webcamDevice;
-	private WebcamImage image;
 
 	/*------------------------------*\
 	|*			  Static			*|

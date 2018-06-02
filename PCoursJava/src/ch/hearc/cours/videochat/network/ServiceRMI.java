@@ -34,6 +34,11 @@ public class ServiceRMI
 
 	public void startSendWebcam()
 		{
+		//TODO update code here
+		if(!WebcamService.getInstance().isOpen()) {
+			return;
+		}
+
 		webcamRefresh.cancel();
 		webcamRefresh.purge();
 		webcamRefresh = new Timer();
@@ -52,7 +57,7 @@ public class ServiceRMI
 					e.printStackTrace();
 					}
 				}
-			}, 500, 500);
+			}, 100, 100); //TODO change refresh speed here
 		}
 
 	public void stopSendWebcam()

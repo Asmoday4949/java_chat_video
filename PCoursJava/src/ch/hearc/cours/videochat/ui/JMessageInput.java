@@ -63,7 +63,7 @@ public class JMessageInput extends Box
 						@Override
 						public void actionPerformed(ActionEvent event)
 							{
-							ServiceGUI.getInstance().sendMessage(jTextFieldMessageInput.getText());
+							ServiceGUI.getInstance().sendMessage(jTextFieldMessageInput.getText()+END_LINE);
 							}
 					};
 
@@ -88,4 +88,5 @@ public class JMessageInput extends Box
 	\*------------------------------*/
 
 	private static final int SPACE_WIDTH = 30;
+	private static final String END_LINE = "\n";
 	}

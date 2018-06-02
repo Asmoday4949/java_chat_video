@@ -15,9 +15,10 @@ public class WebcamImage implements Serializable, Webcam_I
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
-	public WebcamImage()
+
+	public WebcamImage(BufferedImage bufferedImage)
 		{
-		this.webcamImage = null;
+		this.webcamImage = bufferedImage;
 		}
 
 	/*------------------------------------------------------------------*\
@@ -52,14 +53,14 @@ public class WebcamImage implements Serializable, Webcam_I
 	|*		Serialisation			*|
 	\*------------------------------*/
 
-	private void writeObject(ObjectOutputStream out) throws IOException
+	private void writeObject(ObjectOutputStream oos) throws IOException
 		{
-		ImageIO.write(this.webcamImage, "jpeg", out);
+		ImageIO.write(this.webcamImage, "jpeg", oos);
 		}
 
-	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
+	private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException
 		{
-		this.webcamImage = ImageIO.read(in);
+		this.webcamImage = ImageIO.read(ois);
 		}
 
 	/*------------------------------------------------------------------*\
