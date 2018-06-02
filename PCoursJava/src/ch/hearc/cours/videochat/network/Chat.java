@@ -52,6 +52,12 @@ public class Chat implements Chat_I
 			}
 		return instance;
 		}
+
+	public static String getPublicKey()
+		{
+		return null;
+		}
+
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/

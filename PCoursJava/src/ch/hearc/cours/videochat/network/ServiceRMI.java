@@ -35,9 +35,7 @@ public class ServiceRMI
 	public void startSendWebcam()
 		{
 		//TODO update code here
-		if(!WebcamService.getInstance().isOpen()) {
-			return;
-		}
+		if (!WebcamService.getInstance().isOpen()) { return; }
 
 		webcamRefresh.cancel();
 		webcamRefresh.purge();
@@ -98,6 +96,13 @@ public class ServiceRMI
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
+
+	@Override
+	protected void finalize() throws Throwable
+		{
+		WebcamService.getInstance().close();
+		stopSendWebcam();
+		}
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|

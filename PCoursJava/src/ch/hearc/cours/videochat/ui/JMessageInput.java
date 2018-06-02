@@ -59,15 +59,18 @@ public class JMessageInput extends Box
 	private void control()
 		{
 		ActionListener actionListener = new ActionListener()
-					{
-						@Override
-						public void actionPerformed(ActionEvent event)
-							{
-							ServiceGUI.getInstance().sendMessage(jTextFieldMessageInput.getText()+END_LINE);
-							}
-					};
+			{
+
+			@Override
+			public void actionPerformed(ActionEvent event)
+				{
+				ServiceGUI.getInstance().sendMessage(jTextFieldMessageInput.getText() + END_LINE);
+				jTextFieldMessageInput.setText(EMPTY);
+				}
+			};
 
 		jButtonSend.addActionListener(actionListener);
+		jTextFieldMessageInput.addActionListener(actionListener);
 		}
 
 	private void appearance()
@@ -89,4 +92,5 @@ public class JMessageInput extends Box
 
 	private static final int SPACE_WIDTH = 30;
 	private static final String END_LINE = "\n";
+	private static final String EMPTY = "";
 	}

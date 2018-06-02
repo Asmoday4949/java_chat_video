@@ -21,15 +21,14 @@ public class ServiceGUI
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void writeImage(BufferedImage image)
+	public synchronized void writeImage(BufferedImage image)
 		{
 		jFrameChat.getMain().getJWebcam().setImage(image);
 		}
 
-	public void writeMessage(String message)
+	public synchronized void writeMessage(String message)
 		{
 		jFrameChat.getMain().getJChat().appendText(message);
-		System.out.println(message);
 		}
 
 	public void connect(String nickname, String ip, int port)
