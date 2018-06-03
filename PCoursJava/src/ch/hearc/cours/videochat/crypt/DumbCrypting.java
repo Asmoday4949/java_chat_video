@@ -8,6 +8,15 @@ public class DumbCrypting implements Crypting_I
 	{
 
 	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	private DumbCrypting()
+		{
+		// nothing
+		}
+
+	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
@@ -34,6 +43,20 @@ public class DumbCrypting implements Crypting_I
 		}
 
 	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+
+	public static DumbCrypting getInstance()
+		{
+		if(instance == null)
+			{
+			instance = new DumbCrypting();
+			}
+
+		return instance;
+		}
+
+	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
 
@@ -52,4 +75,5 @@ public class DumbCrypting implements Crypting_I
 	\*------------------------------*/
 
 	private final static String ENCODING = "UTF-8";
+	private static DumbCrypting instance = null;
 	}

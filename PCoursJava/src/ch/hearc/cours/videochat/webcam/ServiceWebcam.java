@@ -1,22 +1,25 @@
 
 package ch.hearc.cours.videochat.webcam;
 
+import java.util.List;
+
 import org.junit.Assert;
 
 import com.github.sarxos.webcam.Webcam;
 
-public class WebcamService
+public class ServiceWebcam
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	private WebcamService()
+	private ServiceWebcam()
 		{
 		this.webcamDevice = com.github.sarxos.webcam.Webcam.getDefault();
 
 		this.initWebcamResolution();
+		this.setResolution(WebcamResolution.HD);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -39,19 +42,30 @@ public class WebcamService
 
 	public WebcamImage getImage()
 		{
-		Assert.assertTrue(this.webcamDevice.isOpen());
-		return new WebcamImage(this.webcamDevice.getImage());
+		if(this.webcamDevice.isOpen())
+			{
+			return new WebcamImage(this.webcamDevice.getImage());
+			}
+		else
+			{
+			return null;
+			}
+		}
+
+	public List<com.github.sarxos.webcam.Webcam> getListWebcams()
+		{
+		return com.github.sarxos.webcam.Webcam.getWebcams();
 		}
 
 	/*------------------------------*\
 	|*			  Static			*|
 	\*------------------------------*/
 
-	public synchronized static WebcamService getInstance()
+	public synchronized static ServiceWebcam getInstance()
 		{
 		if (instance == null)
 			{
-			instance = new WebcamService();
+			instance = new ServiceWebcam();
 			}
 
 		return instance;
@@ -64,7 +78,25 @@ public class WebcamService
 	public void setResolution(WebcamResolution resolution)
 		{
 		this.webcamDevice.setViewSize(resolution.getDimension());
+		this.resolution = resolution;
 		}
+
+	public void setWebcamDevice(com.github.sarxos.webcam.Webcam webcamDevice)
+	{
+		if(this.isOpen())
+			{
+			this.close();
+			}
+
+		System.out.println(webcamDevice);
+
+		this.webcamDevice = webcamDevice;
+
+		this.initWebcamResolution();
+		this.setResolution(this.resolution);
+
+		this.open();
+	}
 
 	/*------------------------------*\
 	|*				Is				*|
@@ -81,6 +113,7 @@ public class WebcamService
 
 	private void initWebcamResolution()
 		{
+		Assert.assertTrue(this.webcamDevice != null);
 		this.webcamDevice.setCustomViewSizes(WebcamResolution.getAllDimensions());
 		}
 
@@ -90,11 +123,12 @@ public class WebcamService
 
 	// Tools
 	private Webcam webcamDevice;
+	private WebcamResolution resolution;
 
 	/*------------------------------*\
 	|*			  Static			*|
 	\*------------------------------*/
 
-	private static WebcamService instance = null;
+	private static ServiceWebcam instance = null;
 
 	}

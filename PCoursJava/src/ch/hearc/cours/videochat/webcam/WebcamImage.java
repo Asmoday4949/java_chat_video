@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 
-public class WebcamImage implements Serializable, Webcam_I
+public class WebcamImage implements Serializable, WebcamImage_I
 	{
 
 	/*------------------------------------------------------------------*\

@@ -65,7 +65,6 @@ public class JWebcam extends JPanel
 			int posX = this.getWidth()/2 - bufferedImage.getWidth()/2;
 			int posY = this.getHeight()/2 - bufferedImage.getHeight()/2;
 
-			System.out.println("cpasda");
 			g2d.drawImage(bufferedImage, posX, posY, bufferedImage.getWidth(), bufferedImage.getHeight(), null);
 			}
 		}

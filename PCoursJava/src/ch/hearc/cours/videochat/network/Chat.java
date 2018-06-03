@@ -2,6 +2,7 @@
 package ch.hearc.cours.videochat.network;
 
 import java.rmi.RemoteException;
+import java.security.PublicKey;
 
 import ch.hearc.cours.videochat.ui.ServiceGUI;
 import ch.hearc.cours.videochat.webcam.WebcamImage;
@@ -25,8 +26,11 @@ public class Chat implements Chat_I
 	@Override
 	public void writeImage(WebcamImage webcamImage) throws RemoteException
 		{
-		System.out.println("Write image code");
-		ServiceGUI.getInstance().writeImage(webcamImage.getImage());
+		if(webcamImage != null)
+			{
+			System.out.println("Write image code");
+			ServiceGUI.getInstance().writeImage(webcamImage.getImage());
+			}
 		}
 
 	@Override
@@ -34,6 +38,13 @@ public class Chat implements Chat_I
 		{
 		System.out.println("Write message");
 		ServiceGUI.getInstance().writeMessage(message.getString());
+		}
+
+	@Override
+	public void writePublicKey(PublicKey key)
+		{
+		System.out.println("Write public key");
+		ServiceRMI.getInstance().setPublicKey(key);
 		}
 
 	/*------------------------------*\
@@ -71,6 +82,6 @@ public class Chat implements Chat_I
 	\*------------------------------*/
 
 	// Tools
-	private static Chat instance;
+	private static Chat instance = null;
 
 	}

@@ -50,7 +50,7 @@ public class Message implements Serializable
 
 		try
 			{
-			out.writeObject(crypting.encrypt(message, null));
+			out.writeObject(crypting.encrypt(message, ServiceRMI.getInstance().getPublicKey()));
 			}
 		catch (InvalidKeyException e)
 			{
@@ -63,7 +63,7 @@ public class Message implements Serializable
 		Crypting_I crypting = CryptingFactory.createCrypting();
 
 		System.out.println("[Message]:readObject : Deserialization custom");
-		message = crypting.decrypt((String)in.readObject());
+		message = crypting.decrypt((byte[])in.readObject());
 		}
 
 

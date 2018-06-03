@@ -10,12 +10,12 @@ public class CryptingFactory
 
 	public static Crypting_I createCrypting()
 		{
-		return createDumbCrypting();
+		return createAsymmetricCrypting();
 		}
 
 	public static DumbCrypting createDumbCrypting()
 		{
-		return new DumbCrypting();
+		return DumbCrypting.getInstance();
 		}
 
 	public static AsymmetricCrypting createAsymmetricCrypting()

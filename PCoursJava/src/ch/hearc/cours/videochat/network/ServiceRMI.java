@@ -2,10 +2,11 @@
 package ch.hearc.cours.videochat.network;
 
 import java.rmi.RemoteException;
+import java.security.PublicKey;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import ch.hearc.cours.videochat.webcam.WebcamService;
+import ch.hearc.cours.videochat.webcam.ServiceWebcam;
 
 public class ServiceRMI
 	{
@@ -18,6 +19,7 @@ public class ServiceRMI
 		{
 		Chat.getInstance();
 		webcamRefresh = new Timer();
+		this.publicKey = null;
 		}
 
 	/*------------------------------------------------------------------*\
@@ -35,7 +37,7 @@ public class ServiceRMI
 	public void startSendWebcam()
 		{
 		//TODO update code here
-		if (!WebcamService.getInstance().isOpen()) { return; }
+		if (!ServiceWebcam.getInstance().isOpen()) { return; }
 
 		webcamRefresh.cancel();
 		webcamRefresh.purge();
@@ -48,7 +50,7 @@ public class ServiceRMI
 				{
 				try
 					{
-					ChatRemote.getInstance().getChat().writeImage(WebcamService.getInstance().getImage());
+					ChatRemote.getInstance().getChat().writeImage(ServiceWebcam.getInstance().getImage());
 					}
 				catch (RemoteException e)
 					{
@@ -80,8 +82,22 @@ public class ServiceRMI
 	|*				Set				*|
 	\*------------------------------*/
 
+	public void setPublicKey(PublicKey key)
+		{
+		this.publicKey = key;
+		}
+
 	/*------------------------------*\
 	|*				Get				*|
+	\*------------------------------*/
+
+	public PublicKey getPublicKey()
+		{
+		return this.publicKey;
+		}
+
+	/*------------------------------*\
+	|*			  Static			*|
 	\*------------------------------*/
 
 	public static synchronized ServiceRMI getInstance()
@@ -90,6 +106,7 @@ public class ServiceRMI
 			{
 			instance = new ServiceRMI();
 			}
+
 		return instance;
 		}
 
@@ -100,7 +117,7 @@ public class ServiceRMI
 	@Override
 	protected void finalize() throws Throwable
 		{
-		WebcamService.getInstance().close();
+		ServiceWebcam.getInstance().close();
 		stopSendWebcam();
 		}
 
@@ -116,5 +133,6 @@ public class ServiceRMI
 	\*------------------------------*/
 
 	private static ServiceRMI instance;
+	private PublicKey publicKey;
 
 	}

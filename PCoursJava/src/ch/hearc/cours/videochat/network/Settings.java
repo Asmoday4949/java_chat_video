@@ -134,7 +134,7 @@ public class Settings
 		try
 			{
 			Map<NetworkInterface, InetAddress> mapNetworkAdress = NetworkTools.localhost();
-			System.out.println(mapNetworkAdress); // puis demander à l'utilisateur de le choisir
+			System.out.println(mapNetworkAdress); // then ask user to choose
 
 			// ou
 

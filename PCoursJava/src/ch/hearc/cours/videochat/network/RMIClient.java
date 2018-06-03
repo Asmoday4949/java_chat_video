@@ -4,6 +4,8 @@ package ch.hearc.cours.videochat.network;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 
+import ch.hearc.cours.videochat.crypt.CryptingFactory;
+
 import com.bilat.tools.reseau.rmi.RmiTools;
 import com.bilat.tools.reseau.rmi.RmiURL;
 
@@ -75,6 +77,7 @@ public class RMIClient
 			ChatRemote.init(chatRemote);
 			ChatRemote.getInstance();
 			chatRemote.writeMessage(new Message("test"));
+			chatRemote.writePublicKey(CryptingFactory.createAsymmetricCrypting().getPublicKey());
 			}
 		catch (RemoteException e)
 			{

@@ -4,7 +4,7 @@ package ch.hearc.cours.videochat.ui;
 import java.awt.image.BufferedImage;
 
 import ch.hearc.cours.videochat.network.ServiceRMI;
-import ch.hearc.cours.videochat.webcam.WebcamService;
+import ch.hearc.cours.videochat.webcam.ServiceWebcam;
 
 public class ServiceGUI
 	{
@@ -35,20 +35,20 @@ public class ServiceGUI
 		{
 		ServiceRMI.getInstance().connect(ip, port);
 		new Thread(() -> {
-			startWebcam();
+		startWebcam();
 		}).start();
 		}
 
 	public void startWebcam()
 		{
-		WebcamService.getInstance().open();
+		ServiceWebcam.getInstance().open();
 		ServiceRMI.getInstance().startSendWebcam();
 		}
 
 	public void stopWebcam()
 		{
 		ServiceRMI.getInstance().stopSendWebcam();
-		WebcamService.getInstance().close();
+		ServiceWebcam.getInstance().close();
 		}
 
 	public void sendMessage(String message)

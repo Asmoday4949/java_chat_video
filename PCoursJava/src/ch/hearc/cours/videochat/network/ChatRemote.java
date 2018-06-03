@@ -1,6 +1,8 @@
 
 package ch.hearc.cours.videochat.network;
 
+import java.security.PublicKey;
+
 import org.junit.Assert;
 
 public class ChatRemote
@@ -33,7 +35,7 @@ public class ChatRemote
 	\*------------------------------*/
 
 	/**
-	 * A appeler une seule fois et avant le getInstance!!!
+	 * To call only one time before getInstance
 	 */
 	public synchronized static void init(Chat_I chatRemote)
 		{
@@ -42,7 +44,7 @@ public class ChatRemote
 		}
 
 	/**
-	 * A appeler exactement une fois INIT avant
+	 * must call init before the first time
 	 */
 	public synchronized static ChatRemote getInstance()
 		{
@@ -51,6 +53,7 @@ public class ChatRemote
 			Assert.assertTrue(chatRemote != null);
 			instance = new ChatRemote();
 			}
+
 		return instance;
 		}
 
@@ -62,7 +65,8 @@ public class ChatRemote
 	|*			  Static			*|
 	\*------------------------------*/
 
-	private static Chat_I chatRemote;
+	private static Chat_I chatRemote = null;
+	private static PublicKey publicKey = null;
 	private static ChatRemote instance = null;
 
 	}
