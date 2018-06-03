@@ -56,7 +56,7 @@ public class JFrameChat extends JFrame
 
 	private void appearance()
 		{
-		setSize(600, 400);
+		setSize(1366, 768);
 		setLocationRelativeTo(null); // frame centrer
 		setVisible(true); // last!
 		}

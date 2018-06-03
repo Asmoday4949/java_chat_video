@@ -55,7 +55,10 @@ public class WebcamImage implements Serializable, WebcamImage_I
 
 	private void writeObject(ObjectOutputStream oos) throws IOException
 		{
-		ImageIO.write(this.webcamImage, "jpeg", oos);
+		if(this.webcamImage != null)
+			{
+			ImageIO.write(this.webcamImage, "jpeg", oos);
+			}
 		}
 
 	private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException

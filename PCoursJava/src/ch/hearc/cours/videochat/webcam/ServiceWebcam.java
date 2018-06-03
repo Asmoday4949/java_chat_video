@@ -83,19 +83,23 @@ public class ServiceWebcam
 
 	public void setWebcamDevice(com.github.sarxos.webcam.Webcam webcamDevice)
 	{
-		if(this.isOpen())
+		if(!this.webcamDevice.equals(webcamDevice))
 			{
-			this.close();
+			if (this.isOpen())
+				{
+				this.close();
+				}
+
+			System.out.println(webcamDevice);
+
+			this.webcamDevice = webcamDevice;
+
+			this.initWebcamResolution();
+			this.setResolution(this.resolution);
+
+			this.open();
+
 			}
-
-		System.out.println(webcamDevice);
-
-		this.webcamDevice = webcamDevice;
-
-		this.initWebcamResolution();
-		this.setResolution(this.resolution);
-
-		this.open();
 	}
 
 	/*------------------------------*\
@@ -130,5 +134,4 @@ public class ServiceWebcam
 	\*------------------------------*/
 
 	private static ServiceWebcam instance = null;
-
 	}

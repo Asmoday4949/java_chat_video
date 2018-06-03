@@ -70,18 +70,31 @@ public class JConnection extends Box
 
 	private void appearance()
 		{
-		jLabelNickName.setMaximumSize(JLABEL_SIZE);
-		jLabelIP.setMaximumSize(JLABEL_SIZE);
-		jLabelPort.setMaximumSize(JLABEL_SIZE);
+		jLabelNickName.setMaximumSize(new Dimension(JLABEL_WIDTH, (int)this.jLabelNickName.getMaximumSize().getHeight()));
+		jLabelIP.setMaximumSize(new Dimension(JLABEL_WIDTH, (int)this.jLabelNickName.getMaximumSize().getHeight()));
+		jLabelPort.setMaximumSize(new Dimension(JLABEL_WIDTH, (int)this.jLabelNickName.getMaximumSize().getHeight()));
 
-		jTextFieldNickname.setPreferredSize(JTEXTFIELD_NICKNAME_SIZE);
-		jTextFieldNickname.setMaximumSize(JTEXTFIELD_NICKNAME_SIZE);
+		Dimension dNickname = this.jTextFieldNickname.getMaximumSize();
+		dNickname.width = JTEXTFIELD_NICKNAME_WIDTH;
+		jTextFieldNickname.setMaximumSize(dNickname);
+		dNickname = this.jTextFieldNickname.getPreferredSize();
+		dNickname.width = JTEXTFIELD_NICKNAME_WIDTH;
+		this.jTextFieldNickname.setPreferredSize(dNickname);
 
-		jTextFieldPort.setPreferredSize(JTEXTFIELD_PORT_SIZE);
-		jTextFieldPort.setMaximumSize(JTEXTFIELD_PORT_SIZE);
+		Dimension dPort = this.jTextFieldPort.getMaximumSize();
+		dPort.width = JTEXTFIELD_PORT_WIDTH;
+		System.out.println(dPort.height);
+		jTextFieldPort.setMaximumSize(dPort);
+		dPort = this.jTextFieldNickname.getPreferredSize();
+		dPort.width = JTEXTFIELD_PORT_WIDTH;
+		this.jTextFieldPort.setPreferredSize(dNickname);
 
-		jTextFieldIP.setPreferredSize(JTEXTFIELD_IP_SIZE);
-		jTextFieldIP.setMaximumSize(JTEXTFIELD_IP_SIZE);
+		Dimension dAddress = this.jTextFieldIP.getMaximumSize();
+		dAddress.width = JTEXTFIELD_IP_WIDTH;
+		jTextFieldIP.setMaximumSize(dAddress);
+		dAddress = this.jTextFieldIP.getPreferredSize();
+		dAddress.width = JTEXTFIELD_IP_WIDTH;
+		this.jTextFieldIP.setPreferredSize(dAddress);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -97,9 +110,9 @@ public class JConnection extends Box
 	private JTextField jTextFieldPort;
 	private JButton jButtonConnection;
 
-	static private Dimension JLABEL_SIZE = new Dimension(50, 20);
-	static private Dimension JTEXTFIELD_NICKNAME_SIZE = new Dimension(150, 20);
-	static private Dimension JTEXTFIELD_IP_SIZE = new Dimension(120, 20);
-	static private Dimension JTEXTFIELD_PORT_SIZE = new Dimension(70, 20);
-	static private int SPACE_WIDTH = 20;
+	static final private int JLABEL_WIDTH = 50;
+	static final private int JTEXTFIELD_NICKNAME_WIDTH = 150;
+	static final private int JTEXTFIELD_IP_WIDTH = 120;
+	static final private int JTEXTFIELD_PORT_WIDTH = 70;
+	static final private int SPACE_WIDTH = 20;
 	}

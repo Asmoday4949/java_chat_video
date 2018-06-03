@@ -80,6 +80,6 @@ public class JChat extends Box
 	|*			  Static			*|
 	\*------------------------------*/
 
-	private static final Dimension JTEXTAREA_CHAT_SIZE = new Dimension(500, 300);
+	private static final Dimension JTEXTAREA_CHAT_SIZE = new Dimension(500, 150);
 
 	}
