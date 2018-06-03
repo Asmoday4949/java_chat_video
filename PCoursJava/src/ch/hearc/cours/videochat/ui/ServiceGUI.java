@@ -23,7 +23,7 @@ public class ServiceGUI
 
 	public synchronized void writeImage(BufferedImage image)
 		{
-		jFrameChat.getMain().getJWebcam().setImage(image);
+		jFrameChat.getMain().getJWebcam().getJWebcamImage().setImage(image);
 		}
 
 	public synchronized void writeMessage(String message)

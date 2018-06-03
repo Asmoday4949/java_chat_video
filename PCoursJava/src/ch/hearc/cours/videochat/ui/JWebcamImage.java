@@ -8,14 +8,14 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-public class JWebcam extends JPanel
+public class JWebcamImage extends JPanel
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JWebcam()
+	public JWebcamImage()
 		{
 		geometry();
 		control();

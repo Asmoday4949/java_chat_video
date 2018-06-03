@@ -2,22 +2,12 @@
 package ch.hearc.cours.videochat.ui;
 
 import java.awt.Dimension;
-import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-
-import org.junit.Assert;
-
-import com.github.sarxos.webcam.Webcam;
-
-import ch.hearc.cours.videochat.webcam.ServiceWebcam;
 
 public class JConnection extends Box
 	{
@@ -53,9 +43,6 @@ public class JConnection extends Box
 		jTextFieldIP = new JTextField();
 		jTextFieldPort = new JTextField();
 
-		this.jWebcamList = new JComboBox<Webcam>();
-		this.buildJWebcamList();
-
 		jButtonConnection = new JButton("Connexion");
 
 		this.add(Box.createHorizontalStrut(SPACE_WIDTH));
@@ -68,25 +55,10 @@ public class JConnection extends Box
 		this.add(jLabelPort);
 		this.add(jTextFieldPort);
 		this.add(Box.createHorizontalStrut(SPACE_WIDTH));
-		this.add(jWebcamList);
-		this.add(Box.createHorizontalStrut(SPACE_WIDTH));
 		this.add(jButtonConnection);
 		this.add(Box.createHorizontalStrut(SPACE_WIDTH));
 		}
 
-	private void buildJWebcamList()
-		{
-		Assert.assertTrue(this.jWebcamList != null);
-
-		this.jWebcamList.removeAllItems();
-
-		List<Webcam> listWebcams = ServiceWebcam.getInstance().getListWebcams();
-
-		for(Webcam webcam:listWebcams)
-			{
-			this.jWebcamList.addItem(webcam);
-			}
-		}
 
 	private void control()
 		{
@@ -94,38 +66,6 @@ public class JConnection extends Box
 		ServiceGUI.getInstance().connect(jTextFieldNickname.getText(), jTextFieldIP.getText(), Integer.parseInt(jTextFieldPort.getText()));
 		});
 
-		this.jWebcamList.addActionListener((e) -> {
-
-		if(jWebcamList.getSelectedItem() != null)
-			{
-			new Thread(() -> {
-			ServiceWebcam.getInstance().setWebcamDevice((Webcam)jWebcamList.getSelectedItem());
-			}).start();
-			}
-
-		});
-
-		this.jWebcamList.addPopupMenuListener(new PopupMenuListener()
-			{
-
-			@Override
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e)
-				{
-				buildJWebcamList();
-				}
-
-			@Override
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e)
-				{
-				// nothing
-				}
-
-			@Override
-			public void popupMenuCanceled(PopupMenuEvent e)
-				{
-				// nothing
-				}
-			});
 		}
 
 	private void appearance()
@@ -156,7 +96,6 @@ public class JConnection extends Box
 	private JTextField jTextFieldIP;
 	private JTextField jTextFieldPort;
 	private JButton jButtonConnection;
-	private JComboBox jWebcamList;
 
 	static private Dimension JLABEL_SIZE = new Dimension(50, 20);
 	static private Dimension JTEXTFIELD_NICKNAME_SIZE = new Dimension(150, 20);
