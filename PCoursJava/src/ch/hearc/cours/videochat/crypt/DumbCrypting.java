@@ -1,6 +1,7 @@
 
 package ch.hearc.cours.videochat.crypt;
 
+import java.io.UnsupportedEncodingException;
 import java.security.PublicKey;
 
 public class DumbCrypting implements Crypting_I
@@ -11,15 +12,25 @@ public class DumbCrypting implements Crypting_I
 	\*------------------------------------------------------------------*/
 
 	@Override
-	public String encrypt(String stringToCrypt, PublicKey key)
+	public byte[] encrypt(String stringToCrypt, PublicKey key)
 		{
-		return stringToCrypt + " IT IS SAFELY CRYPTED";
+		return (stringToCrypt + " IT IS SAFELY CRYPTED").getBytes();
 		}
 
 	@Override
-	public String decrypt(String encryptedString)
+	public String decrypt(byte[] data)
 		{
-		return encryptedString.substring(0, encryptedString.length() - 20);
+		String encryptedString = "";
+		try
+			{
+			encryptedString = new String(data, ENCODING);
+			}
+		catch (UnsupportedEncodingException e)
+			{
+			e.printStackTrace();
+			}
+
+		return encryptedString.substring(0, encryptedString.length() - 21);
 		}
 
 	/*------------------------------*\
@@ -31,4 +42,14 @@ public class DumbCrypting implements Crypting_I
 		{
 		return null; // no public key in dumb crypting
 		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+
+	private final static String ENCODING = "UTF-8";
 	}

@@ -1,6 +1,7 @@
 
 package ch.hearc.cours.videochat.crypt;
 
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -44,16 +45,16 @@ public class AsymmetricCrypting implements Crypting_I
 	\*------------------------------------------------------------------*/
 
 	@Override
-	public String encrypt(String stringToCrypt, PublicKey key) throws InvalidKeyException
+	public byte[] encrypt(String stringToCrypt, PublicKey key) throws InvalidKeyException
 		{
 		try
 			{
 			Cipher cipher = Cipher.getInstance("RSA");
 			cipher.init(Cipher.ENCRYPT_MODE, publicKey);
 
-			return cipher.doFinal(stringToCrypt.getBytes()).toString();
+			return cipher.doFinal(stringToCrypt.getBytes(ENCODING));
 			}
-		catch (NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException e)
+		catch (NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException e)
 			{
 			e.printStackTrace();
 
@@ -63,17 +64,17 @@ public class AsymmetricCrypting implements Crypting_I
 		}
 
 	@Override
-	public String decrypt(String encryptedString)
+	public String decrypt(byte[] data)
 		{
 		try
 			{
 			Cipher cipher = Cipher.getInstance("RSA");
 			cipher.init(Cipher.DECRYPT_MODE, this.privateKey);
 
-			return cipher.doFinal(encryptedString.getBytes()).toString();
+			return new String(cipher.doFinal(data), ENCODING);
 
 			}
-		catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException e)
+		catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException e)
 			{
 			e.printStackTrace();
 
@@ -117,4 +118,5 @@ public class AsymmetricCrypting implements Crypting_I
 	\*------------------------------*/
 
 	private static AsymmetricCrypting instance = null;
+	private final static String ENCODING = "UTF-8";
 	}
