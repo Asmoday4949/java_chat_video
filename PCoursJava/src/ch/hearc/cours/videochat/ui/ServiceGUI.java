@@ -53,6 +53,7 @@ public class ServiceGUI
 
 	public void sendMessage(String message)
 		{
+		jFrameChat.getMain().getJChat().appendText(message);
 		ServiceRMI.getInstance().writeMessage(message);
 		}
 
