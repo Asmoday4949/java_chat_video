@@ -28,7 +28,7 @@ public class ServiceRMI
 
 	public void connect(String ip, int port)
 		{
-		Settings.init(ip);
+		Settings.initRemote(ip);
 
 		RMIClient.getInstance();
 		ChatRemote.getInstance();

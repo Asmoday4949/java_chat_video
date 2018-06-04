@@ -3,6 +3,8 @@ package ch.hearc.cours.videochat.ui;
 
 import javax.swing.UIManager;
 
+import ch.hearc.cours.videochat.network.Settings;
+
 public class UseServiceGUI
 	{
 
@@ -12,6 +14,11 @@ public class UseServiceGUI
 
 	public static void main(String[] args)
 		{
+		Settings settings = Settings.getInstance();
+		if (args.length > 0)
+			{
+			Settings.patchLocal(args[0]);
+			}
 		main();
 		}
 
@@ -23,9 +30,8 @@ public class UseServiceGUI
 			}
 		catch (Exception e)
 			{
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 			}
-
 		ServiceGUI.getInstance();
 		}
 

@@ -50,7 +50,7 @@ public class AsymmetricCrypting implements Crypting_I
 		try
 			{
 			Cipher cipher = Cipher.getInstance("RSA");
-			cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+			cipher.init(Cipher.ENCRYPT_MODE, key);
 
 			return cipher.doFinal(stringToCrypt.getBytes(ENCODING));
 			}
@@ -72,7 +72,6 @@ public class AsymmetricCrypting implements Crypting_I
 			cipher.init(Cipher.DECRYPT_MODE, this.privateKey);
 
 			return new String(cipher.doFinal(data), ENCODING);
-
 			}
 		catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException e)
 			{
