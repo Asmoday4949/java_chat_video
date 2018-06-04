@@ -83,7 +83,6 @@ public class JConnection extends Box
 
 		Dimension dPort = this.jTextFieldPort.getMaximumSize();
 		dPort.width = JTEXTFIELD_PORT_WIDTH;
-		System.out.println(dPort.height);
 		jTextFieldPort.setMaximumSize(dPort);
 		dPort = this.jTextFieldNickname.getPreferredSize();
 		dPort.width = JTEXTFIELD_PORT_WIDTH;

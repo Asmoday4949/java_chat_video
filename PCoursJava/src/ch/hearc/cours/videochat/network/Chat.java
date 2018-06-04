@@ -28,7 +28,7 @@ public class Chat implements Chat_I
 		{
 		if(webcamImage != null)
 			{
-			System.out.println("Write image code");
+			System.out.println("[Chat] : writeImage : Write image code");
 			ServiceGUI.getInstance().writeImage(webcamImage.getImage());
 			}
 		}
@@ -36,14 +36,14 @@ public class Chat implements Chat_I
 	@Override
 	public void writeMessage(Message message) throws RemoteException
 		{
-		System.out.println("Write message");
+		System.out.println("[Chat] : writeMessage : Write message");
 		ServiceGUI.getInstance().writeMessage(message.getString());
 		}
 
 	@Override
 	public void writePublicKey(PublicKey key)
 		{
-		System.out.println("Write public key");
+		System.out.println("[Chat] : writePublicKey : Write public key");
 		ServiceRMI.getInstance().setPublicKey(key);
 		}
 

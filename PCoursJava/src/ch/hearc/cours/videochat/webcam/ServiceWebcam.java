@@ -90,8 +90,6 @@ public class ServiceWebcam
 				this.close();
 				}
 
-			System.out.println(webcamDevice);
-
 			this.webcamDevice = webcamDevice;
 
 			this.initWebcamResolution();

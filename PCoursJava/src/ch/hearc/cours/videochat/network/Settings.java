@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.bilat.tools.reseau.rmi.NetworkTools;
 import com.bilat.tools.reseau.rmi.RmiAddress;
-import com.bilat.tools.reseau.rmi.RmiID;
 import com.bilat.tools.reseau.rmi.RmiTools;
 
 public class Settings
@@ -28,27 +27,16 @@ public class Settings
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public static void init(RmiAddress rmiAddress, RmiID rmiID)
+	public static void patchLocal(String address)
 		{
-		Settings.rmiAddress = rmiAddress;
-		//Settings.rmiID = rmiID;
+		System.out.println("[Settings] : patchLocal : patch local address fix for linux");
+		localAddress = getByName(address);
+		System.setProperty("java.rmi.server.hostname", address); // Patch linux: ip of localhost
 		}
 
-	public static void init(String address)
+	public static void initRemote(String address)
 		{
-		//try
-			{
-			//System.out.println(RmiAddress.create(address));
-			//remoteAddress = RmiAddress.create(address).getRemote();
-			remoteAddress = getByName(address);
-			}
-		//catch (IndexOutOfBoundsException | SocketException | UnknownHostException e)
-			{
-			//e.printStackTrace();
-			}
-//		RmiAddress rmiAddress = settings(address);
-//		RmiID rmiID = new RmiID(ID_CLIENT, ID_SERVER);
-//		init(rmiAddress, rmiID);
+		remoteAddress = getByName(address);
 		}
 
 	/*------------------------------*\

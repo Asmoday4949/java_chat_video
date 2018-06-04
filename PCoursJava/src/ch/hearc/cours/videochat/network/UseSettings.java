@@ -15,7 +15,7 @@ public class UseSettings
 	public static void main()
 		{
 		Settings settings = Settings.getInstance();
-		Settings.init("157.26.105.136");
+		Settings.initRemote("157.26.105.136");
 		try
 			{
 			System.out.println(settings.getLocal());
