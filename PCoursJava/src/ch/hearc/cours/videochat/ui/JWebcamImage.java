@@ -77,8 +77,6 @@ public class JWebcamImage extends JPanel
 			newHeight = height;
 			}
 
-		System.out.println("Width: " + width + " height: " + height + " Ratio: " + ratio);
-
 		BufferedImage buf = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
 
 		Graphics2D g = buf.createGraphics();
