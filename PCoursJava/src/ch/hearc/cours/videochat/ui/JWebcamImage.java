@@ -62,11 +62,28 @@ public class JWebcamImage extends JPanel
 	// https://java.developpez.com/faq/gui?page=Les-images#Comment-redimensionner-une-image
 	public BufferedImage scale(BufferedImage source, int width, int height)
 		{
-		BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		double ratio = ((double)source.getWidth() / (double)source.getHeight());
+		int newWidth;
+		int newHeight;
+
+		if(width < height)
+			{
+			newWidth = width;
+			newHeight = (int)(width / ratio);
+			}
+		else
+			{
+			newWidth = (int)(ratio * height);
+			newHeight = height;
+			}
+
+		System.out.println("Width: " + width + " height: " + height + " Ratio: " + ratio);
+
+		BufferedImage buf = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
 
 		Graphics2D g = buf.createGraphics();
 		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g.drawImage(source, 0, 0, width, height, null);
+		g.drawImage(source, 0, 0, newWidth, newHeight, null);
 		g.dispose();
 
 		return buf;
