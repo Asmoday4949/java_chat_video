@@ -28,7 +28,6 @@ public class Chat implements Chat_I
 		{
 		if(webcamImage != null)
 			{
-			System.out.println("[Chat] : writeImage : Write image code");
 			ServiceGUI.getInstance().writeImage(webcamImage.getImage());
 			}
 		}
