@@ -76,7 +76,6 @@ public class RMIClient
 			System.out.println(chatRemote);
 			ChatRemote.init(chatRemote);
 			ChatRemote.getInstance();
-			chatRemote.writeMessage(new Message("test"));
 			chatRemote.writePublicKey(CryptingFactory.createAsymmetricCrypting().getPublicKey());
 			}
 		catch (RemoteException e)
