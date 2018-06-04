@@ -96,7 +96,6 @@ public class JWebcam extends JPanel
 			ServiceWebcam.getInstance().setWebcamDevice((Webcam)jWebcamsList.getSelectedItem());
 			}).start();
 			}
-
 		});
 		}
 

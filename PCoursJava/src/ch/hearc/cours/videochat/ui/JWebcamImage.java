@@ -3,6 +3,7 @@ package ch.hearc.cours.videochat.ui;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
@@ -58,14 +59,29 @@ public class JWebcamImage extends JPanel
 		g2d.setTransform(transform);
 		}
 
+	// https://java.developpez.com/faq/gui?page=Les-images#Comment-redimensionner-une-image
+	public BufferedImage scale(BufferedImage source, int width, int height)
+		{
+		BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+		Graphics2D g = buf.createGraphics();
+		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g.drawImage(source, 0, 0, width, height, null);
+		g.dispose();
+
+		return buf;
+		}
+
 	private void drawImageCenter(Graphics2D g2d)
 		{
 		if (bufferedImage != null)
 			{
-			int posX = this.getWidth()/2 - bufferedImage.getWidth()/2;
-			int posY = this.getHeight()/2 - bufferedImage.getHeight()/2;
+			BufferedImage resultImage = scale(bufferedImage, this.getWidth(), this.getHeight());
 
-			g2d.drawImage(bufferedImage, posX, posY, bufferedImage.getWidth(), bufferedImage.getHeight(), null);
+			int posX = this.getWidth() / 2 - resultImage.getWidth() / 2;
+			int posY = this.getHeight() / 2 - resultImage.getHeight() / 2;
+
+			g2d.drawImage(resultImage, posX, posY, resultImage.getWidth(), resultImage.getHeight(), null);
 			}
 		}
 
