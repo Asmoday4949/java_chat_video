@@ -16,4 +16,6 @@ public interface Chat_I extends Remote
 
 	public void writePublicKey(PublicKey key) throws RemoteException;
 
+	public void ping() throws RemoteException;
+
 	}

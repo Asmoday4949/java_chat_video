@@ -6,6 +6,7 @@ import java.security.PublicKey;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ch.hearc.cours.videochat.ui.ServiceGUI;
 import ch.hearc.cours.videochat.webcam.ServiceWebcam;
 
 public class ServiceRMI
@@ -18,7 +19,8 @@ public class ServiceRMI
 	private ServiceRMI()
 		{
 		Chat.getInstance();
-		webcamRefresh = new Timer();
+		this.timerWebcamRefresh = new Timer();
+		this.timerReconnect = new Timer();
 		this.publicKey = null;
 		}
 
@@ -36,13 +38,12 @@ public class ServiceRMI
 
 	public void startSendWebcam()
 		{
-		//TODO update code here
 		if (!ServiceWebcam.getInstance().isOpen()) { return; }
 
-		webcamRefresh.cancel();
-		webcamRefresh.purge();
-		webcamRefresh = new Timer();
-		webcamRefresh.schedule(new TimerTask()
+		timerWebcamRefresh.cancel();
+		timerWebcamRefresh.purge();
+		timerWebcamRefresh = new Timer();
+		timerWebcamRefresh.schedule(new TimerTask()
 			{
 
 			@Override
@@ -54,16 +55,17 @@ public class ServiceRMI
 					}
 				catch (RemoteException e)
 					{
+					disconnected();
 					e.printStackTrace();
 					}
 				}
-			}, 100, 100); //TODO change refresh speed here
+			}, REFRESH_MS, REFRESH_MS); //TODO change refresh speed here
 		}
 
 	public void stopSendWebcam()
 		{
-		webcamRefresh.cancel();
-		webcamRefresh.purge();
+		timerWebcamRefresh.cancel();
+		timerWebcamRefresh.purge();
 		}
 
 	public void writeMessage(String message)
@@ -74,6 +76,7 @@ public class ServiceRMI
 			}
 		catch (RemoteException e)
 			{
+			disconnected();
 			e.printStackTrace();
 			}
 		}
@@ -121,18 +124,58 @@ public class ServiceRMI
 		stopSendWebcam();
 		}
 
+	private void disconnected()
+		{
+		stopSendWebcam(); // TODO don't reactivate if it was not
+		ServiceGUI.getInstance().disconnected();
+
+		if (timerReconnect != null)
+			{
+			timerReconnect.cancel();
+			timerReconnect.purge();
+			}
+		timerReconnect = new Timer();
+		timerReconnect.scheduleAtFixedRate(new TimerTask()
+			{
+
+			@Override
+			public void run()
+				{
+				try
+					{
+					ChatRemote.getInstance().getChat().ping();
+
+					//Success
+					timerReconnect.cancel();
+					timerReconnect.purge();
+					timerReconnect = null;
+
+					ChatRemote.getInstance().getChat().writePublicKey(publicKey);
+					startSendWebcam();
+					}
+				catch (RemoteException e)
+					{
+					System.out.println("Reconnect unsuccessful");
+					e.printStackTrace();
+					}
+				}
+			}, 500, 500);
+		}
+
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private Timer webcamRefresh;
+	private Timer timerWebcamRefresh;
+	private Timer timerReconnect;
+	private PublicKey publicKey;
 
 	/*------------------------------*\
 	|*			  Static			*|
 	\*------------------------------*/
 
 	private static ServiceRMI instance;
-	private PublicKey publicKey;
+	private static final int REFRESH_MS = 1000 / 60; //Taux de raffraichissement -> 60 Hz
 
 	}

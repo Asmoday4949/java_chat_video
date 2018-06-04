@@ -24,9 +24,15 @@ public class Chat implements Chat_I
 	\*------------------------------------------------------------------*/
 
 	@Override
+	public void ping()
+		{
+		// Rien
+		}
+
+	@Override
 	public void writeImage(WebcamImage webcamImage) throws RemoteException
 		{
-		if(webcamImage != null)
+		if (webcamImage != null)
 			{
 			ServiceGUI.getInstance().writeImage(webcamImage.getImage());
 			}

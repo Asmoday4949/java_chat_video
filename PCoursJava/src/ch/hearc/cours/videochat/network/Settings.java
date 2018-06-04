@@ -19,6 +19,16 @@ public class Settings
 
 	private Settings()
 		{
+//		try
+//			{
+//			//List<InetAddress> listAddress = NetworkTools.localhost("eth");
+//			//List<InetAddress> listAddress = NetworkTools.localhost("wifi");
+//			}
+//		catch (SocketException e)
+//			{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			}
 		localAddress = RmiAddress.createLocal().getLocal();
 		System.setProperty("java.rmi.server.hostname", localAddress.getHostAddress()); // Patch linux: ip of localhost
 		}

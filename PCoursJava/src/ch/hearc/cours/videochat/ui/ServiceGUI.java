@@ -56,6 +56,12 @@ public class ServiceGUI
 		ServiceRMI.getInstance().writeMessage(message);
 		}
 
+	public void disconnected()
+		{
+		// TODO Malik -> Event when remote is disconnected
+
+		}
+
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
