@@ -52,6 +52,12 @@ public class Chat implements Chat_I
 		ServiceRMI.getInstance().setPublicKey(key);
 		}
 
+	@Override
+	public void disconnect() throws RemoteException
+		{
+		ServiceGUI.getInstance().disconnected();
+		}
+
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/

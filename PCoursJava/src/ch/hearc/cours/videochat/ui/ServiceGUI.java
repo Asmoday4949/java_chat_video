@@ -33,7 +33,7 @@ public class ServiceGUI
 
 	public void connect(String nickname, String ip, int port)
 		{
-		ServiceRMI.getInstance().connect(ip, port);
+		ServiceRMI.getInstance().connect(ip, port, port);
 		new Thread(() -> {
 		startWebcam();
 		}).start();
@@ -57,9 +57,14 @@ public class ServiceGUI
 		ServiceRMI.getInstance().writeMessage(message);
 		}
 
+	public void connectionIssues()
+		{
+		//TODO Problèmes de connexion temporaires
+		}
+
 	public void disconnected()
 		{
-		// TODO Malik -> Event when remote is disconnected
+		// TODO Malik -> Fin de connexion du partenaire
 
 		}
 

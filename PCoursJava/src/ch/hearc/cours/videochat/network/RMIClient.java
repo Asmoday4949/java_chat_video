@@ -25,6 +25,20 @@ public class RMIClient
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	public boolean rebind()
+		{
+		try
+			{
+			RmiTools.rebind(ChatRemote.getInstance().getChat(), new RmiURL(Settings.ID_CHAT, Settings.getInstance().getRemote(), Settings.getInstance().getLocalPort()));
+			return true;
+			}
+		catch (RemoteException | MalformedURLException e)
+			{
+			e.printStackTrace();
+			}
+		return false;
+		}
+
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
@@ -55,7 +69,7 @@ public class RMIClient
 
 	private void clientSide()
 		{
-		RmiURL url = new RmiURL(Settings.ID_CHAT, Settings.getInstance().getRemote(), Settings.PORT_CHAT);
+		RmiURL url = new RmiURL(Settings.ID_CHAT, Settings.getInstance().getRemote(), Settings.getInstance().getRemotePort());
 		Chat_I chatRemote;
 		try
 			{
@@ -90,12 +104,28 @@ public class RMIClient
 			{
 			this.chat = Chat.getInstance();
 			System.out.println(Settings.getInstance().getLocal());
-			RmiTools.shareObject(this.chat, new RmiURL(Settings.ID_CHAT, Settings.PORT_CHAT));
+			RmiTools.shareObject(this.chat, new RmiURL(Settings.ID_CHAT, Settings.getInstance().getLocalPort()));
 			}
 		catch (RemoteException | MalformedURLException e)
 			{
 			e.printStackTrace();
 			System.err.println("[RMIClient] : serverSide() : Impossible de partager l'objet Chat : c");
+			}
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			disconnect();
+		}));
+		}
+
+	private void disconnect()
+		{
+		ServiceRMI.getInstance().stopSendWebcam();
+		try
+			{
+			ChatRemote.getInstance().getChat().disconnect();
+			}
+		catch (RemoteException e)
+			{
+			e.printStackTrace();
 			}
 		}
 

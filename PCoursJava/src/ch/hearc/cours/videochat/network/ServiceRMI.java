@@ -1,6 +1,7 @@
 
 package ch.hearc.cours.videochat.network;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.security.PublicKey;
 import java.util.Timer;
@@ -28,12 +29,24 @@ public class ServiceRMI
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void connect(String ip, int port)
+	public void connect(String remoteIP, int remotePort, int localPort)
 		{
-		Settings.initRemote(ip);
+		Settings.init(remoteIP, remotePort, localPort);
 
 		RMIClient.getInstance();
 		ChatRemote.getInstance();
+		}
+
+	public void disconnect()
+		{
+		System.out.println("Client disconnected");
+
+		if (timerReconnect != null)
+			{
+			timerReconnect.cancel();
+			timerReconnect.purge();
+			}
+		timerReconnect = null;
 		}
 
 	public void startSendWebcam()
@@ -141,9 +154,21 @@ public class ServiceRMI
 			@Override
 			public void run()
 				{
+				reconnect();
+				}
+			}, 500, 500);
+		}
+
+	private void reconnect()
+		{
+		try
+			{
+			if (Settings.getInstance().getRemote().isReachable(50))
+				{
 				try
 					{
 					ChatRemote.getInstance().getChat().ping();
+					System.out.println("Ping successful");
 
 					//Success
 					timerReconnect.cancel();
@@ -155,11 +180,16 @@ public class ServiceRMI
 					}
 				catch (RemoteException e)
 					{
-					System.out.println("Reconnect unsuccessful");
+					ServiceGUI.getInstance().connectionIssues();
+					disconnect();
 					e.printStackTrace();
 					}
 				}
-			}, 500, 500);
+			}
+		catch (IOException e)
+			{
+			e.printStackTrace();
+			}
 		}
 
 	/*------------------------------------------------------------------*\
