@@ -42,7 +42,7 @@ public class JChat extends Box
 
 	public String getMessageInput()
 		{
-		return boxMessageInput.getInput();
+		return jMessageInput.getInput();
 		}
 
 	/*------------------------------------------------------------------*\
@@ -52,10 +52,10 @@ public class JChat extends Box
 	private void geometry()
 		{
 		jTextAreaChat = new JTextArea();
-		boxMessageInput = new JMessageInput();
+		jMessageInput = new JMessageInput();
 
 		this.add(jTextAreaChat);
-		this.add(boxMessageInput);
+		this.add(jMessageInput);
 		}
 
 	private void control()
@@ -74,7 +74,7 @@ public class JChat extends Box
 
 	// Tools
 	private JTextArea jTextAreaChat;
-	private JMessageInput boxMessageInput;
+	private JMessageInput jMessageInput;
 
 	/*------------------------------*\
 	|*			  Static			*|

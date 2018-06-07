@@ -33,7 +33,7 @@ public class JFrameChat extends JFrame
 
 	public JMain getMain()
 		{
-		return this.jPanelMain;
+		return this.jMain;
 		}
 
 	/*------------------------------------------------------------------*\
@@ -42,11 +42,11 @@ public class JFrameChat extends JFrame
 
 	private void geometry()
 		{
-		jPanelMain = new JMain();
+		jMain = new JMain();
 
 		setLayout(new BorderLayout());
 
-		this.add(jPanelMain, BorderLayout.CENTER);
+		this.add(jMain, BorderLayout.CENTER);
 		}
 
 	private void control()
@@ -66,6 +66,6 @@ public class JFrameChat extends JFrame
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private JMain jPanelMain;
+	private JMain jMain;
 
 	}

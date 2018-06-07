@@ -38,7 +38,7 @@ public class JMain extends JPanel
 
 	public JChat getJChat()
 		{
-		return boxChat;
+		return jChat;
 		}
 
 	/*------------------------------------------------------------------*\
@@ -48,17 +48,17 @@ public class JMain extends JPanel
 	private void geometry()
 		{
 		// JComponent : Instanciation
-		boxConnection = new JConnection();
+		jConnection = new JConnection();
 		jWebcam = new JWebcam();
-		boxChat = new JChat();
+		jChat = new JChat();
 
 		// Layout : Specification
 		setLayout(new BorderLayout());
 
 		// JComponent : add
-		this.add(boxConnection, BorderLayout.NORTH);
+		this.add(jConnection, BorderLayout.NORTH);
 		this.add(jWebcam, BorderLayout.CENTER);
-		this.add(boxChat, BorderLayout.SOUTH);
+		this.add(jChat, BorderLayout.SOUTH);
 		}
 
 	private void control()
@@ -76,8 +76,8 @@ public class JMain extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private JConnection boxConnection;
+	private JConnection jConnection;
 	private JWebcam jWebcam;
-	private JChat boxChat;
+	private JChat jChat;
 
 	}
