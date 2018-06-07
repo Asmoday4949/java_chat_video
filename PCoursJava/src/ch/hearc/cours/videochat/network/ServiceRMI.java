@@ -71,17 +71,25 @@ public class ServiceRMI
 					}
 				catch (RemoteException e)
 					{
-					disconnected();
+					ServiceGUI.getInstance().connectionIssues();
 					e.printStackTrace();
 					}
 				}
-			}, REFRESH_MS, REFRESH_MS); //TODO change refresh speed here
+			}, REFRESH_MS, REFRESH_MS);
 		}
 
 	public void stopSendWebcam()
 		{
 		timerWebcamRefresh.cancel();
 		timerWebcamRefresh.purge();
+		try
+			{
+			ChatRemote.getInstance().getChat().writeImage(null);
+			}
+		catch (RemoteException e)
+			{
+			e.printStackTrace();
+			}
 		}
 
 	public void writeMessage(String message)
@@ -92,7 +100,7 @@ public class ServiceRMI
 			}
 		catch (RemoteException e)
 			{
-			disconnected();
+			connectionIssues();
 			e.printStackTrace();
 			}
 		}
@@ -140,9 +148,9 @@ public class ServiceRMI
 		stopSendWebcam();
 		}
 
-	private void disconnected()
+	private void connectionIssues()
 		{
-		stopSendWebcam(); // TODO don't reactivate if it was not
+		stopSendWebcam();
 		ServiceGUI.getInstance().disconnected();
 
 		if (timerReconnect != null)
