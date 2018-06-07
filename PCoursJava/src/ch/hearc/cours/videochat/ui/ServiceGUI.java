@@ -62,11 +62,13 @@ public class ServiceGUI
 	public void connectionIssues()
 		{
 		//TODO Problèmes de connexion temporaires
+		System.out.println("[ServiceGUI] : disconnected : Connexions issues");
 		}
 
 	public void disconnected()
 		{
 		// TODO Malik -> Fin de connexion du partenaire
+		System.out.println("[ServiceGUI] : disconnected : Client disconnected");
 		}
 
 	public void setSourceWebcam(BufferedImage sourceImage)
