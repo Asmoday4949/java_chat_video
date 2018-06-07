@@ -62,6 +62,7 @@ public class ServiceGUI
 	public void connectionIssues()
 		{
 		//TODO Problèmes de connexion temporaires
+		System.out.println("[ServiceGUI] : disconnected : Connexions issues");
 		}
 
 	public void disconnected()

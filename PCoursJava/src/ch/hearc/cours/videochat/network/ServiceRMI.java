@@ -82,6 +82,14 @@ public class ServiceRMI
 		{
 		timerWebcamRefresh.cancel();
 		timerWebcamRefresh.purge();
+		try
+			{
+			ChatRemote.getInstance().getChat().writeImage(null);
+			}
+		catch (RemoteException e)
+			{
+			e.printStackTrace();
+			}
 		}
 
 	public void writeMessage(String message)
@@ -92,7 +100,7 @@ public class ServiceRMI
 			}
 		catch (RemoteException e)
 			{
-			disconnected();
+			connectionIssues();
 			e.printStackTrace();
 			}
 		}
