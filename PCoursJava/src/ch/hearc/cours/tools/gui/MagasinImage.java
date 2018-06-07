@@ -14,15 +14,12 @@ public class MagasinImage
 	|*		 Version Synchrone (bloquant)								*|
 	\*------------------------------------------------------------------*/
 
-	public static final ImageIcon WARNING = ImageLoader.loadSynchroneJar("ressources/warning.png");
-	public static final ImageIcon COFFEE = ImageLoader.loadSynchroneJar("ressources/coffee_logo.png");
-	public static final ImageIcon LINUX = ImageLoader.loadSynchroneJar("ressources/linux.png");
+	public static final ImageIcon ARC = ImageLoader.loadSynchroneJar("ressources/arc.png");
 
 	/*------------------------------------------------------------------*\
 	|*		Version Assynchrone	(non bloquant)							*|
 	\*------------------------------------------------------------------*/
 
-	//public static final ImageIcon warning = ImageLoader.loadAsynchroneJar("ressources/warning.png");
-	//public static final ImageIcon coffee = ImageLoader.loadAsynchroneJar("ressources/coffee_logo.png");
+	//public static final ImageIcon ARC = ImageLoader.loadAsynchroneJar("ressources/arc.png");
 
 	}

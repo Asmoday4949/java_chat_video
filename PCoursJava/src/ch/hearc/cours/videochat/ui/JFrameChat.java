@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+import ch.hearc.cours.tools.gui.MagasinImage;
+
 public class JFrameChat extends JFrame
 	{
 
@@ -56,6 +58,7 @@ public class JFrameChat extends JFrame
 
 	private void appearance()
 		{
+		this.setIconImage(MagasinImage.ARC.getImage());
 		setSize(1366, 768);
 		setLocationRelativeTo(null); // frame centrer
 		setVisible(true); // last!
