@@ -1,25 +1,22 @@
-
 package ch.hearc.cours.videochat.ui;
 
-import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.JButton;
 
-public class JChat extends Box
+public class JDisconnection extends Box
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JChat()
+	public JDisconnection()
 		{
-		super(BoxLayout.Y_AXIS);
-
+		super(BoxLayout.X_AXIS);
 		geometry();
 		control();
 		appearance();
@@ -29,11 +26,6 @@ public class JChat extends Box
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void appendText(String message)
-		{
-		this.jTextAreaChat.append(message);
-		}
-
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
@@ -42,36 +34,34 @@ public class JChat extends Box
 	|*				Get				*|
 	\*------------------------------*/
 
-	public String getMessageInput()
-		{
-		return jMessageInput.getInput();
-		}
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
 	private void geometry()
 		{
-		jTextAreaChat = new JTextArea(10, 10);
-		jMessageInput = new JMessageInput();
+		jButtonDisconnect = new JButton("Déconnexion");
 
-		jScrollPaneChat = new JScrollPane(jTextAreaChat);
-		this.add(jScrollPaneChat);
-		this.add(jMessageInput);
+		this.add(Box.createHorizontalGlue());
+		this.add(jButtonDisconnect);
+		this.add(Box.createHorizontalStrut(SPACE_WIDTH));
 		}
 
 	private void control()
 		{
-		jTextAreaChat.setEditable(false);
-		jTextAreaChat.setWrapStyleWord(true);
-		jScrollPaneChat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		//jScrollPaneChat.setSize(10);
+		ActionListener listener = new ActionListener()
+					{
+						@Override
+						public void actionPerformed(ActionEvent arg0)
+							{
+							//ServiceRMI.getInstance().
+							}
+					};
 		}
 
 	private void appearance()
 		{
-		jTextAreaChat.setPreferredSize(JTEXTAREA_CHAT_SIZE);
+		// rien
 		}
 
 	/*------------------------------------------------------------------*\
@@ -79,14 +69,7 @@ public class JChat extends Box
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private JScrollPane jScrollPaneChat;
-	private JTextArea jTextAreaChat;
-	private JMessageInput jMessageInput;
-
-	/*------------------------------*\
-	|*			  Static			*|
-	\*------------------------------*/
-
-	private static final Dimension JTEXTAREA_CHAT_SIZE = new Dimension(500, 150);
-
+	JButton jButtonDisconnect;
+	static final private int SPACE_WIDTH = 20;
 	}
+
