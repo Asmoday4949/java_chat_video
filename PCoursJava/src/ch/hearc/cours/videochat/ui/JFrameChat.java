@@ -31,7 +31,7 @@ public class JFrameChat extends JFrame
 	|*				Get				*|
 	\*------------------------------*/
 
-	public JMain getMain()
+	public JMain getJMain()
 		{
 		return this.jPanelMain;
 		}
