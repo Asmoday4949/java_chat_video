@@ -6,8 +6,9 @@ import java.awt.Dimension;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 
 public class JChat extends Box
 	{
@@ -31,7 +32,17 @@ public class JChat extends Box
 
 	public void appendText(String message)
 		{
-		this.jTextAreaChat.append(message);
+		Document doc = jTextPaneChat.getDocument();
+		jTextPaneChat.setCaretPosition(doc.getLength());
+
+		try
+			{
+			doc.insertString(doc.getLength(), message, null);
+			}
+		catch (BadLocationException e)
+			{
+			e.printStackTrace();
+			}
 		}
 
 	/*------------------------------*\
@@ -53,25 +64,22 @@ public class JChat extends Box
 
 	private void geometry()
 		{
-		jTextAreaChat = new JTextArea(10, 10);
+		jTextPaneChat = new JTextPane();
 		jMessageInput = new JMessageInput();
+		jScrollPaneChat = new JScrollPane(jTextPaneChat);
 
-		jScrollPaneChat = new JScrollPane(jTextAreaChat);
 		this.add(jScrollPaneChat);
 		this.add(jMessageInput);
 		}
 
 	private void control()
 		{
-		jTextAreaChat.setEditable(false);
-		jTextAreaChat.setWrapStyleWord(true);
-		jScrollPaneChat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		//jScrollPaneChat.setSize(100, 100);
+		jTextPaneChat.setEditable(false);
 		}
 
 	private void appearance()
 		{
-		jTextAreaChat.setPreferredSize(JTEXTAREA_CHAT_SIZE);
+		jTextPaneChat.setPreferredSize(JTEXTAREA_CHAT_SIZE);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -80,13 +88,13 @@ public class JChat extends Box
 
 	// Tools
 	private JScrollPane jScrollPaneChat;
-	private JTextArea jTextAreaChat;
+	private JTextPane jTextPaneChat;
 	private JMessageInput jMessageInput;
 
 	/*------------------------------*\
 	|*			  Static			*|
 	\*------------------------------*/
 
-	private static final Dimension JTEXTAREA_CHAT_SIZE = new Dimension(500, 150);
+	private static final Dimension JTEXTAREA_CHAT_SIZE = new Dimension(500, 300);
 
 	}

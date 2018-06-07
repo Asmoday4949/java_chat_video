@@ -3,6 +3,7 @@ package ch.hearc.cours.videochat.ui;
 
 import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,7 +23,7 @@ public class JConnection extends Box
 
 	public JConnection()
 		{
-		super(BoxLayout.X_AXIS);
+		super(BoxLayout.Y_AXIS);
 
 		geometry();
 		control();
@@ -48,19 +49,22 @@ public class JConnection extends Box
 		jPort = new JSpinner();
 
 		jButtonConnection = new JButton("Connexion");
+		this.setAlignmentX(LEFT_ALIGNMENT);
 
-		this.add(Box.createHorizontalStrut(SPACE_WIDTH));
+		this.setBorder(BorderFactory.createTitledBorder("Connexion"));
+		this.add(Box.createVerticalGlue());
 		this.add(jLabelNickName);
 		this.add(jNickname);
-		this.add(Box.createHorizontalGlue());
+		this.add(Box.createVerticalStrut(SPACE));
 		this.add(jLabelIP);
 		this.add(jIP);
-		this.add(Box.createHorizontalStrut(SPACE_WIDTH));
+		this.add(Box.createVerticalStrut(SPACE));
 		this.add(jLabelPort);
 		this.add(jPort);
-		this.add(Box.createHorizontalStrut(SPACE_WIDTH));
+		this.add(Box.createVerticalStrut(SPACE));
+		this.add(Box.createVerticalStrut(SPACE));
 		this.add(jButtonConnection);
-		this.add(Box.createHorizontalStrut(SPACE_WIDTH));
+		this.add(Box.createVerticalGlue());
 		}
 
 	private void control()
@@ -79,31 +83,40 @@ public class JConnection extends Box
 
 	private void appearance()
 		{
-		jLabelNickName.setMaximumSize(new Dimension(JLABEL_WIDTH, (int)this.jLabelNickName.getMaximumSize().getHeight()));
-		jLabelIP.setMaximumSize(new Dimension(JLABEL_WIDTH, (int)this.jLabelNickName.getMaximumSize().getHeight()));
-		jLabelPort.setMaximumSize(new Dimension(JLABEL_WIDTH, (int)this.jLabelNickName.getMaximumSize().getHeight()));
+		jLabelNickName.setAlignmentX(LEFT_ALIGNMENT);
+		jLabelNickName.setMinimumSize(NICKNAME_LABEL);
+		jLabelNickName.setPreferredSize(NICKNAME_LABEL);
+		jLabelNickName.setMaximumSize(NICKNAME_LABEL);
 
-		Dimension dNickname = this.jNickname.getMaximumSize();
-		dNickname.width = JNICKNAME_WIDTH;
-		jNickname.setMaximumSize(dNickname);
-		dNickname = this.jNickname.getPreferredSize();
-		dNickname.width = JNICKNAME_WIDTH;
-		this.jNickname.setPreferredSize(dNickname);
+		jLabelIP.setAlignmentX(LEFT_ALIGNMENT);
+		jLabelIP.setMinimumSize(IP_LABEL);
+		jLabelIP.setPreferredSize(IP_LABEL);
+		jLabelIP.setMaximumSize(IP_LABEL);
 
-		Dimension dAddress = this.jIP.getMaximumSize();
-		dAddress.width = JIP_WIDTH;
-		jIP.setMaximumSize(dAddress);
-		dAddress = this.jIP.getPreferredSize();
-		dAddress.width = JIP_WIDTH;
-		this.jIP.setPreferredSize(dAddress);
+		jLabelPort.setAlignmentX(LEFT_ALIGNMENT);
+		jLabelPort.setMinimumSize(PORT_LABEL);
+		jLabelPort.setPreferredSize(PORT_LABEL);
+		jLabelPort.setMaximumSize(PORT_LABEL);
 
-		Dimension dPort = this.jPort.getMaximumSize();
-		dPort.width = JPORT_WIDTH;
-		jPort.setMaximumSize(dPort);
-		dPort = this.jNickname.getPreferredSize();
-		dPort.width = JPORT_WIDTH;
-		this.jPort.setPreferredSize(dNickname);
+		jNickname.setAlignmentX(LEFT_ALIGNMENT);
+		jNickname.setMinimumSize(NICKNAME_FIELD);
+		jNickname.setPreferredSize(NICKNAME_FIELD);
+		jNickname.setMaximumSize(NICKNAME_FIELD);
 
+		jIP.setAlignmentX(LEFT_ALIGNMENT);
+		jIP.setMinimumSize(IP_FIELD);
+		jIP.setPreferredSize(IP_FIELD);
+		jIP.setMaximumSize(IP_FIELD);
+
+		jPort.setAlignmentX(LEFT_ALIGNMENT);
+		jPort.setMinimumSize(PORT_FIELD);
+		jPort.setPreferredSize(PORT_FIELD);
+		jPort.setMaximumSize(PORT_FIELD);
+
+		jButtonConnection.setAlignmentX(LEFT_ALIGNMENT);
+		jButtonConnection.setMinimumSize(CONNECTION_BUTTON);
+		jButtonConnection.setPreferredSize(CONNECTION_BUTTON);
+		jButtonConnection.setMaximumSize(CONNECTION_BUTTON);
 		}
 
 	private boolean validateForm()
@@ -128,9 +141,13 @@ public class JConnection extends Box
 
 	static final private  int MIN_PORT = 1024;
 	static final private  int MAX_PORT = 65535;
-	static final private int JLABEL_WIDTH = 50;
-	static final private int JNICKNAME_WIDTH = 150;
-	static final private int JIP_WIDTH = 120;
-	static final private int JPORT_WIDTH = 70;
-	static final private int SPACE_WIDTH = 20;
+
+	static final private int SPACE = 20;
+	static final private Dimension IP_LABEL = new Dimension(50, 20);
+	static final private Dimension PORT_LABEL = new Dimension(50, 20);
+	static final private Dimension NICKNAME_LABEL = new Dimension(50, 20);
+	static final private Dimension IP_FIELD = new Dimension(100, 20);
+	static final private Dimension PORT_FIELD = new Dimension(100, 20);
+	static final private Dimension NICKNAME_FIELD = new Dimension(100, 20);
+	static final private Dimension CONNECTION_BUTTON = new Dimension(100, 20);
 	}
