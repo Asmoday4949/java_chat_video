@@ -15,6 +15,7 @@ public class ServiceGUI
 	private ServiceGUI()
 		{
 		jFrameChat = new JFrameChat();
+		this.setState(WindowState.DISCONNECTED);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -43,7 +44,9 @@ public class ServiceGUI
 
 	public void startWebcam()
 		{
+		this.setState(WindowState.WEBCAM_LOADING);
 		ServiceWebcam.getInstance().open();
+		this.setState(WindowState.CONNECTED);
 		ServiceRMI.getInstance().startSendWebcam();
 		}
 
@@ -62,12 +65,14 @@ public class ServiceGUI
 	public void connectionIssues()
 		{
 		//TODO Problèmes de connexion temporaires
+		this.setState(WindowState.CONNECTION_ERROR);
 		System.out.println("[ServiceGUI] : disconnected : Connexions issues");
 		}
 
 	public void disconnected()
 		{
 		// TODO Malik -> Fin de connexion du partenaire
+		this.setState(WindowState.DISCONNECTED);
 		System.out.println("[ServiceGUI] : disconnected : Client disconnected");
 		}
 
@@ -75,6 +80,22 @@ public class ServiceGUI
 		{
 		this.jFrameChat.getJMain().getJWebcam().getJWebcamImage().setSourceImage(sourceImage);
 		}
+
+	public void setState(WindowState state)
+		{
+		JMain main = this.jFrameChat.getJMain();
+
+		if(state == WindowState.CONNECTED)
+			{
+			main.loadJWebcam();
+			}
+		else
+			{
+			main.loadJImage();
+			main.setImage(state.getImage());
+			}
+		}
+
 
 	/*------------------------------*\
 	|*				Set				*|
@@ -107,5 +128,6 @@ public class ServiceGUI
 
 	private JFrameChat jFrameChat;
 	private static ServiceGUI instance;
+	private WindowState state;
 
 	}
