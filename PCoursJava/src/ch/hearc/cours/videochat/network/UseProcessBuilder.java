@@ -1,9 +1,10 @@
 
 package ch.hearc.cours.videochat.network;
 
-import com.bilat.tools.reseau.rmi.RmiTools;
+import java.io.IOException;
+import java.io.InputStream;
 
-public class UseSettings
+public class UseProcessBuilder
 	{
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
@@ -16,18 +17,19 @@ public class UseSettings
 
 	public static void main()
 		{
-		Settings settings = Settings.getInstance();
-		Settings.init("157.26.105.136", RmiTools.PORT_RMI_DEFAUT, RmiTools.PORT_RMI_DEFAUT);
 		try
 			{
-			System.out.println(settings.getLocal());
-			System.out.println(settings.getRemote());
+			ProcessBuilder processBuilder = new ProcessBuilder("ping " + Settings.getInstance().getRemote().getHostAddress());
+			Process process = processBuilder.start();
+			InputStream IS = process.getErrorStream();
+			process = processBuilder.start();
+
 			}
-		catch (IndexOutOfBoundsException e)
+		catch (IOException e)
 			{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			}
-
 		}
 
 	/*------------------------------------------------------------------*\

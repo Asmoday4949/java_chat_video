@@ -66,7 +66,6 @@ public class Message implements Serializable
 		message = crypting.decrypt((byte[])in.readObject());
 		}
 
-
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
