@@ -2,12 +2,15 @@
 package ch.hearc.cours.videochat.ui;
 
 import java.awt.Dimension;
+import java.text.ParseException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 public class JConnection extends Box
 	{
@@ -41,7 +44,7 @@ public class JConnection extends Box
 
 		jTextFieldNickname = new JTextField();
 		jTextFieldIP = new JTextField();
-		jTextFieldPort = new JTextField();
+		jTextFieldPort = new JFormattedTextField(createFormatter("#####"));
 
 		jButtonConnection = new JButton("Connexion");
 
@@ -62,9 +65,11 @@ public class JConnection extends Box
 	private void control()
 		{
 		jButtonConnection.addActionListener((e) -> {
-		ServiceGUI.getInstance().connect(jTextFieldNickname.getText(), jTextFieldIP.getText(), Integer.parseInt(jTextFieldPort.getText()));
+		if (validateForm())
+			{
+			ServiceGUI.getInstance().connect(jTextFieldNickname.getText(), jTextFieldIP.getText(), Integer.parseInt(jTextFieldPort.getText()));
+			}
 		});
-
 		}
 
 	private void appearance()
@@ -95,6 +100,29 @@ public class JConnection extends Box
 		this.jTextFieldIP.setPreferredSize(dAddress);
 		}
 
+	private boolean validateForm()
+		{
+		int port = Integer.parseInt(jTextFieldPort.getText());
+
+		return port <= MAX_PORT;
+		}
+
+	private MaskFormatter createFormatter(String s)
+		{
+		MaskFormatter formatter = null;
+
+		try
+			{
+			formatter = new MaskFormatter(s);
+			}
+		catch (ParseException e)
+			{
+			e.printStackTrace();
+			}
+
+		return formatter;
+		}
+
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
@@ -105,9 +133,10 @@ public class JConnection extends Box
 	private JLabel jLabelPort;
 	private JTextField jTextFieldNickname;
 	private JTextField jTextFieldIP;
-	private JTextField jTextFieldPort;
+	private JFormattedTextField jTextFieldPort;
 	private JButton jButtonConnection;
 
+	static final private  int MAX_PORT = 65535;
 	static final private int JLABEL_WIDTH = 50;
 	static final private int JTEXTFIELD_NICKNAME_WIDTH = 150;
 	static final private int JTEXTFIELD_IP_WIDTH = 120;

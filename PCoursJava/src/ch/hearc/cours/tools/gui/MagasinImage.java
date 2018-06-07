@@ -15,11 +15,13 @@ public class MagasinImage
 	\*------------------------------------------------------------------*/
 
 	public static final ImageIcon ARC = ImageLoader.loadSynchroneJar("ressources/arc.png");
+	public static final ImageIcon SEND = ImageLoader.loadSynchroneJar("ressources/send.png");
 
 	/*------------------------------------------------------------------*\
 	|*		Version Assynchrone	(non bloquant)							*|
 	\*------------------------------------------------------------------*/
 
 	//public static final ImageIcon ARC = ImageLoader.loadAsynchroneJar("ressources/arc.png");
+	//public static final ImageIcon SEND = ImageLoader.loadAsynchroneJar("ressources/send.png");
 
 	}
