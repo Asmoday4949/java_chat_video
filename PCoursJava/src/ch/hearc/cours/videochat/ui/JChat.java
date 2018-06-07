@@ -6,7 +6,9 @@ import java.awt.Dimension;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 
 public class JChat extends Box
 	{
@@ -30,8 +32,17 @@ public class JChat extends Box
 
 	public void appendText(String message)
 		{
-		this.jTextAreaChat.append(message);
-		this.jTextAreaChat.setCaretPosition(jTextAreaChat.getDocument().getLength());
+		Document doc = jTextPaneChat.getDocument();
+		jTextPaneChat.setCaretPosition(doc.getLength());
+
+		try
+			{
+			doc.insertString(doc.getLength(), message, null);
+			}
+		catch (BadLocationException e)
+			{
+			e.printStackTrace();
+			}
 		}
 
 	/*------------------------------*\
@@ -53,25 +64,22 @@ public class JChat extends Box
 
 	private void geometry()
 		{
-		jTextAreaChat = new JTextArea();
+		jTextPaneChat = new JTextPane();
 		jMessageInput = new JMessageInput();
+		jScrollPaneChat = new JScrollPane(jTextPaneChat);
 
-		jScrollPaneChat = new JScrollPane(jTextAreaChat);
 		this.add(jScrollPaneChat);
 		this.add(jMessageInput);
 		}
 
 	private void control()
 		{
-		jTextAreaChat.setEditable(false);
-		jTextAreaChat.setWrapStyleWord(true);
-		//jScrollPaneChat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		jTextPaneChat.setEditable(false);
 		}
 
 	private void appearance()
 		{
-		jTextAreaChat.setPreferredSize(JTEXTAREA_CHAT_SIZE);
-		//jScrollPaneChat.setPreferredSize(new Dimension(1000, 100));
+		jTextPaneChat.setPreferredSize(JTEXTAREA_CHAT_SIZE);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -80,7 +88,7 @@ public class JChat extends Box
 
 	// Tools
 	private JScrollPane jScrollPaneChat;
-	private JTextArea jTextAreaChat;
+	private JTextPane jTextPaneChat;
 	private JMessageInput jMessageInput;
 
 	/*------------------------------*\
