@@ -7,7 +7,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
 
 public class JChat extends Box
 	{
@@ -32,6 +31,7 @@ public class JChat extends Box
 	public void appendText(String message)
 		{
 		this.jTextAreaChat.append(message);
+		this.jTextAreaChat.setCaretPosition(jTextAreaChat.getDocument().getLength());
 		}
 
 	/*------------------------------*\
@@ -53,7 +53,7 @@ public class JChat extends Box
 
 	private void geometry()
 		{
-		jTextAreaChat = new JTextArea(10, 10);
+		jTextAreaChat = new JTextArea();
 		jMessageInput = new JMessageInput();
 
 		jScrollPaneChat = new JScrollPane(jTextAreaChat);
@@ -65,13 +65,13 @@ public class JChat extends Box
 		{
 		jTextAreaChat.setEditable(false);
 		jTextAreaChat.setWrapStyleWord(true);
-		jScrollPaneChat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		//jScrollPaneChat.setSize(100, 100);
+		//jScrollPaneChat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		}
 
 	private void appearance()
 		{
 		jTextAreaChat.setPreferredSize(JTEXTAREA_CHAT_SIZE);
+		//jScrollPaneChat.setPreferredSize(new Dimension(1000, 100));
 		}
 
 	/*------------------------------------------------------------------*\
@@ -87,6 +87,6 @@ public class JChat extends Box
 	|*			  Static			*|
 	\*------------------------------*/
 
-	private static final Dimension JTEXTAREA_CHAT_SIZE = new Dimension(500, 150);
+	private static final Dimension JTEXTAREA_CHAT_SIZE = new Dimension(500, 300);
 
 	}
