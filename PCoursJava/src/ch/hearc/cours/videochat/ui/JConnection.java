@@ -59,7 +59,6 @@ public class JConnection extends Box
 		this.add(Box.createHorizontalStrut(SPACE_WIDTH));
 		}
 
-
 	private void control()
 		{
 		jButtonConnection.addActionListener((e) -> {

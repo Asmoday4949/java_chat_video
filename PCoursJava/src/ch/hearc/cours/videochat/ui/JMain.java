@@ -27,6 +27,20 @@ public class JMain extends JPanel
 	|*				Set				*|
 	\*------------------------------*/
 
+	public void showJDisconnection(boolean show)
+		{
+		if(show)
+			{
+			this.jConnection.setVisible(false);
+			this.add(jDisconnection, BorderLayout.NORTH);
+			}
+		else
+			{
+			this.jConnection.setVisible(true);
+			this.remove(jDisconnection);
+			}
+		}
+
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
@@ -49,6 +63,7 @@ public class JMain extends JPanel
 		{
 		// JComponent : Instanciation
 		jConnection = new JConnection();
+		jDisconnection = new JDisconnection();
 		jWebcam = new JWebcam();
 		jChat = new JChat();
 
@@ -56,6 +71,7 @@ public class JMain extends JPanel
 		setLayout(new BorderLayout());
 
 		// JComponent : add
+		this.add(jDisconnection, BorderLayout.NORTH);
 		this.add(jConnection, BorderLayout.NORTH);
 		this.add(jWebcam, BorderLayout.CENTER);
 		this.add(jChat, BorderLayout.SOUTH);
@@ -68,7 +84,6 @@ public class JMain extends JPanel
 
 	private void appearance()
 		{
-		// rien
 		}
 
 	/*------------------------------------------------------------------*\
@@ -77,6 +92,7 @@ public class JMain extends JPanel
 
 	// Tools
 	private JConnection jConnection;
+	private JDisconnection jDisconnection;
 	private JWebcam jWebcam;
 	private JChat jChat;
 
