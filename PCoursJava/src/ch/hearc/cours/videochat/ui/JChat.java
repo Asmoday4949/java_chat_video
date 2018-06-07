@@ -66,7 +66,7 @@ public class JChat extends Box
 		jTextAreaChat.setEditable(false);
 		jTextAreaChat.setWrapStyleWord(true);
 		jScrollPaneChat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		//jScrollPaneChat.setSize(10);
+		//jScrollPaneChat.setSize(100, 100);
 		}
 
 	private void appearance()
