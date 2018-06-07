@@ -15,6 +15,5 @@
 	<classpathentry exported="true" kind="lib" path="/PDeploy/Deploy/ext/slf4j-api-1.7.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="/PDeploy/Deploy/ext/slf4j-simple-1.7.2.jar"/>
 	<classpathentry kind="lib" path="/PDeploy/Deploy/ressources.jar"/>
-	<classpathentry kind="lib" path="/PDeploy/Deploy/ext/commons-validator-1.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

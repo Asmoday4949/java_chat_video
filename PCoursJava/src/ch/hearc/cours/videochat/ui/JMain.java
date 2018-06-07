@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
+import ch.hearc.cours.tools.gui.JCentrer;
+
 public class JMain extends JPanel
 	{
 
@@ -23,23 +25,22 @@ public class JMain extends JPanel
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	public void showConnection()
+		{
+		this.removeAll();
+		this.add(new JCentrer(jConnection), BorderLayout.CENTER);
+		}
+
+	public void showChat()
+		{
+		this.removeAll();
+		this.add(jWebcam, BorderLayout.CENTER);
+		this.add(jChat, BorderLayout.SOUTH);
+		}
+
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
-
-	public void showJDisconnection(boolean show)
-		{
-		if(show)
-			{
-			this.jConnection.setVisible(false);
-			this.add(jDisconnection, BorderLayout.NORTH);
-			}
-		else
-			{
-			this.jConnection.setVisible(true);
-			this.remove(jDisconnection);
-			}
-		}
 
 	/*------------------------------*\
 	|*				Get				*|
@@ -63,7 +64,6 @@ public class JMain extends JPanel
 		{
 		// JComponent : Instanciation
 		jConnection = new JConnection();
-		jDisconnection = new JDisconnection();
 		jWebcam = new JWebcam();
 		jChat = new JChat();
 
@@ -71,10 +71,7 @@ public class JMain extends JPanel
 		setLayout(new BorderLayout());
 
 		// JComponent : add
-		this.add(jDisconnection, BorderLayout.NORTH);
-		this.add(jConnection, BorderLayout.NORTH);
-		this.add(jWebcam, BorderLayout.CENTER);
-		this.add(jChat, BorderLayout.SOUTH);
+		showConnection();
 		}
 
 	private void control()
@@ -92,7 +89,6 @@ public class JMain extends JPanel
 
 	// Tools
 	private JConnection jConnection;
-	private JDisconnection jDisconnection;
 	private JWebcam jWebcam;
 	private JChat jChat;
 
