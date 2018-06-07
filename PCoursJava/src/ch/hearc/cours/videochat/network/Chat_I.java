@@ -18,4 +18,6 @@ public interface Chat_I extends Remote
 
 	public void ping() throws RemoteException;
 
+	public void disconnect() throws RemoteException;
+
 	}
