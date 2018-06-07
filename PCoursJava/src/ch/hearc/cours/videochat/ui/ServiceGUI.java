@@ -67,6 +67,7 @@ public class ServiceGUI
 	public void disconnected()
 		{
 		// TODO Malik -> Fin de connexion du partenaire
+		System.out.println("[ServiceGUI] : disconnected : Client disconnected");
 		}
 
 	public void setSourceWebcam(BufferedImage sourceImage)

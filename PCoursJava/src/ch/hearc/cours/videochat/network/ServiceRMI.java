@@ -71,11 +71,11 @@ public class ServiceRMI
 					}
 				catch (RemoteException e)
 					{
-					disconnected();
+					ServiceGUI.getInstance().connectionIssues();
 					e.printStackTrace();
 					}
 				}
-			}, REFRESH_MS, REFRESH_MS); //TODO change refresh speed here
+			}, REFRESH_MS, REFRESH_MS);
 		}
 
 	public void stopSendWebcam()
@@ -140,9 +140,9 @@ public class ServiceRMI
 		stopSendWebcam();
 		}
 
-	private void disconnected()
+	private void connectionIssues()
 		{
-		stopSendWebcam(); // TODO don't reactivate if it was not
+		stopSendWebcam();
 		ServiceGUI.getInstance().disconnected();
 
 		if (timerReconnect != null)
