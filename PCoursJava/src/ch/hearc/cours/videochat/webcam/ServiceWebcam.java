@@ -1,11 +1,14 @@
 
 package ch.hearc.cours.videochat.webcam;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import org.junit.Assert;
 
 import com.github.sarxos.webcam.Webcam;
+
+import ch.hearc.cours.tools.BufferedImageTools;
 
 public class ServiceWebcam
 	{
@@ -44,7 +47,9 @@ public class ServiceWebcam
 		{
 		if(this.webcamDevice.isOpen())
 			{
-			return new WebcamImage(this.webcamDevice.getImage());
+			BufferedImage image = this.webcamDevice.getImage();
+
+			return new WebcamImage(BufferedImageTools.convertToGrayScale(image));
 			}
 		else
 			{
@@ -118,6 +123,7 @@ public class ServiceWebcam
 		Assert.assertTrue(this.webcamDevice != null);
 		this.webcamDevice.setCustomViewSizes(WebcamResolution.getAllDimensions());
 		}
+
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|

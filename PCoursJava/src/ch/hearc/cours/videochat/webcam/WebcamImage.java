@@ -25,16 +25,6 @@ public class WebcamImage implements Serializable, WebcamImage_I
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-
-	/*------------------------------*\
-	|*				Set				*|
-	\*------------------------------*/
-
-	public void setImage(BufferedImage image)
-		{
-		this.webcamImage = image;
-		}
-
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
@@ -55,7 +45,7 @@ public class WebcamImage implements Serializable, WebcamImage_I
 
 	private void writeObject(ObjectOutputStream oos) throws IOException
 		{
-		if(this.webcamImage != null)
+		if(this.webcamImage != null && oos != null)
 			{
 			ImageIO.write(this.webcamImage, "jpeg", oos);
 			}

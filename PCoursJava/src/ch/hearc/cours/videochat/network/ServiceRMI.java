@@ -9,6 +9,7 @@ import java.util.TimerTask;
 
 import ch.hearc.cours.videochat.ui.ServiceGUI;
 import ch.hearc.cours.videochat.webcam.ServiceWebcam;
+import ch.hearc.cours.videochat.webcam.WebcamImage;
 
 public class ServiceRMI
 	{
@@ -64,7 +65,9 @@ public class ServiceRMI
 				{
 				try
 					{
-					ChatRemote.getInstance().getChat().writeImage(ServiceWebcam.getInstance().getImage());
+					WebcamImage image = ServiceWebcam.getInstance().getImage();
+					ChatRemote.getInstance().getChat().writeImage(image);
+					ServiceGUI.getInstance().setSourceWebcam(image.getImage());
 					}
 				catch (RemoteException e)
 					{

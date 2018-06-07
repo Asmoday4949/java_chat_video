@@ -5,7 +5,9 @@ import java.awt.Dimension;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 
 public class JChat extends Box
 	{
@@ -42,7 +44,7 @@ public class JChat extends Box
 
 	public String getMessageInput()
 		{
-		return boxMessageInput.getInput();
+		return jMessageInput.getInput();
 		}
 
 	/*------------------------------------------------------------------*\
@@ -51,16 +53,20 @@ public class JChat extends Box
 
 	private void geometry()
 		{
-		jTextAreaChat = new JTextArea();
-		boxMessageInput = new JMessageInput();
+		jTextAreaChat = new JTextArea(10, 10);
+		jMessageInput = new JMessageInput();
 
-		this.add(jTextAreaChat);
-		this.add(boxMessageInput);
+		jScrollPaneChat = new JScrollPane(jTextAreaChat);
+		this.add(jScrollPaneChat);
+		this.add(jMessageInput);
 		}
 
 	private void control()
 		{
 		jTextAreaChat.setEditable(false);
+		jTextAreaChat.setWrapStyleWord(true);
+		jScrollPaneChat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		//jScrollPaneChat.setSize(100, 100);
 		}
 
 	private void appearance()
@@ -73,8 +79,9 @@ public class JChat extends Box
 	\*------------------------------------------------------------------*/
 
 	// Tools
+	private JScrollPane jScrollPaneChat;
 	private JTextArea jTextAreaChat;
-	private JMessageInput boxMessageInput;
+	private JMessageInput jMessageInput;
 
 	/*------------------------------*\
 	|*			  Static			*|

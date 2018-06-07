@@ -27,6 +27,20 @@ public class JMain extends JPanel
 	|*				Set				*|
 	\*------------------------------*/
 
+	public void showJDisconnection(boolean show)
+		{
+		if(show)
+			{
+			this.jConnection.setVisible(false);
+			this.add(jDisconnection, BorderLayout.NORTH);
+			}
+		else
+			{
+			this.jConnection.setVisible(true);
+			this.remove(jDisconnection);
+			}
+		}
+
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
@@ -38,7 +52,7 @@ public class JMain extends JPanel
 
 	public JChat getJChat()
 		{
-		return boxChat;
+		return jChat;
 		}
 
 	/*------------------------------------------------------------------*\
@@ -48,17 +62,19 @@ public class JMain extends JPanel
 	private void geometry()
 		{
 		// JComponent : Instanciation
-		boxConnection = new JConnection();
+		jConnection = new JConnection();
+		jDisconnection = new JDisconnection();
 		jWebcam = new JWebcam();
-		boxChat = new JChat();
+		jChat = new JChat();
 
 		// Layout : Specification
 		setLayout(new BorderLayout());
 
 		// JComponent : add
-		this.add(boxConnection, BorderLayout.NORTH);
+		this.add(jDisconnection, BorderLayout.NORTH);
+		this.add(jConnection, BorderLayout.NORTH);
 		this.add(jWebcam, BorderLayout.CENTER);
-		this.add(boxChat, BorderLayout.SOUTH);
+		this.add(jChat, BorderLayout.SOUTH);
 		}
 
 	private void control()
@@ -68,7 +84,6 @@ public class JMain extends JPanel
 
 	private void appearance()
 		{
-		// rien
 		}
 
 	/*------------------------------------------------------------------*\
@@ -76,8 +91,9 @@ public class JMain extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private JConnection boxConnection;
+	private JConnection jConnection;
+	private JDisconnection jDisconnection;
 	private JWebcam jWebcam;
-	private JChat boxChat;
+	private JChat jChat;
 
 	}

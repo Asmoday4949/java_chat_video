@@ -23,17 +23,19 @@ public class ServiceGUI
 
 	public synchronized void writeImage(BufferedImage image)
 		{
-		jFrameChat.getMain().getJWebcam().getJWebcamImage().setImage(image);
+		jFrameChat.getJMain().getJWebcam().getJWebcamImage().setDestinationImage(image);
 		}
 
 	public synchronized void writeMessage(String message)
 		{
-		jFrameChat.getMain().getJChat().appendText(message);
+		jFrameChat.getJMain().getJChat().appendText(message);
 		}
 
 	public void connect(String nickname, String ip, int port)
 		{
+		jFrameChat.getJMain().showJDisconnection(true);
 		ServiceRMI.getInstance().connect(ip, port, port);
+
 		new Thread(() -> {
 		startWebcam();
 		}).start();
@@ -53,7 +55,7 @@ public class ServiceGUI
 
 	public void sendMessage(String message)
 		{
-		jFrameChat.getMain().getJChat().appendText(message);
+		jFrameChat.getJMain().getJChat().appendText(message);
 		ServiceRMI.getInstance().writeMessage(message);
 		}
 
@@ -65,7 +67,11 @@ public class ServiceGUI
 	public void disconnected()
 		{
 		// TODO Malik -> Fin de connexion du partenaire
+		}
 
+	public void setSourceWebcam(BufferedImage sourceImage)
+		{
+		this.jFrameChat.getJMain().getJWebcam().getJWebcamImage().setSourceImage(sourceImage);
 		}
 
 	/*------------------------------*\

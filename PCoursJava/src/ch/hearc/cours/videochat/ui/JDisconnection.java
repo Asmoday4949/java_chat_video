@@ -1,19 +1,22 @@
-
 package ch.hearc.cours.videochat.ui;
 
-import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 
-public class JFrameChat extends JFrame
+public class JDisconnection extends Box
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JFrameChat()
+	public JDisconnection()
 		{
+		super(BoxLayout.X_AXIS);
 		geometry();
 		control();
 		appearance();
@@ -31,34 +34,34 @@ public class JFrameChat extends JFrame
 	|*				Get				*|
 	\*------------------------------*/
 
-	public JMain getJMain()
-		{
-		return this.jMain;
-		}
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
 	private void geometry()
 		{
-		jMain = new JMain();
+		jButtonDisconnect = new JButton("Déconnexion");
 
-		setLayout(new BorderLayout());
-
-		this.add(jMain, BorderLayout.CENTER);
+		this.add(Box.createHorizontalGlue());
+		this.add(jButtonDisconnect);
+		this.add(Box.createHorizontalStrut(SPACE_WIDTH));
 		}
 
 	private void control()
 		{
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		ActionListener listener = new ActionListener()
+					{
+						@Override
+						public void actionPerformed(ActionEvent arg0)
+							{
+							//ServiceRMI.getInstance().
+							}
+					};
 		}
 
 	private void appearance()
 		{
-		setSize(1366, 768);
-		setLocationRelativeTo(null); // frame centrer
-		setVisible(true); // last!
+		// rien
 		}
 
 	/*------------------------------------------------------------------*\
@@ -66,6 +69,7 @@ public class JFrameChat extends JFrame
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private JMain jMain;
-
+	JButton jButtonDisconnect;
+	static final private int SPACE_WIDTH = 20;
 	}
+
