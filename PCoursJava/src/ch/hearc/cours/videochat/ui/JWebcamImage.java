@@ -121,7 +121,7 @@ public class JWebcamImage extends JPanel
 			double percentagePos = 1 - percentageMargin - percentageWidth;
 
 			int xPos = (int)(this.getWidth() * percentagePos);
-			int yPos = (int)(this.getHeight() * percentagePos);
+			int yPos = (int)(this.getHeight() * (percentagePos - 0.04d));
 
 			BufferedImage resultImage = scale(this.bufferedImageSource, wantedWidth, wantedHeight);
 

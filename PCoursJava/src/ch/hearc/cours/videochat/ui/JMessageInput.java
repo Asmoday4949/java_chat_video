@@ -9,6 +9,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
+import ch.hearc.cours.tools.gui.MagasinImage;
+
 public class JMessageInput extends Box
 	{
 
@@ -75,7 +77,8 @@ public class JMessageInput extends Box
 
 	private void appearance()
 		{
-		// rien
+
+		this.jButtonSend.setIcon(MagasinImage.SEND);
 		}
 
 	/*------------------------------------------------------------------*\
