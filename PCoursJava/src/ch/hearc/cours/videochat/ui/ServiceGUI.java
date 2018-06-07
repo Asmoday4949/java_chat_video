@@ -33,7 +33,7 @@ public class ServiceGUI
 
 	public void connect(String nickname, String ip, int port)
 		{
-		jFrameChat.getMain().showJDisconnection(true);
+		jFrameChat.getJMain().showJDisconnection(true);
 		ServiceRMI.getInstance().connect(ip, port);
 		new Thread(() -> {
 		startWebcam();
