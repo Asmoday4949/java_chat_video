@@ -3,6 +3,7 @@ package ch.hearc.cours.videochat.ui;
 
 import java.awt.image.BufferedImage;
 
+import ch.hearc.cours.videochat.data.UserData;
 import ch.hearc.cours.videochat.network.ServiceRMI;
 import ch.hearc.cours.videochat.webcam.ServiceWebcam;
 
@@ -34,6 +35,9 @@ public class ServiceGUI
 
 	public void connect(String nickname, String ip, int port)
 		{
+		UserData userData = UserData.getInstance();
+		userData.init(nickname);
+
 		ServiceRMI.getInstance().connect(ip, port, port);
 
 		jFrameChat.getJMain().loadJImage();

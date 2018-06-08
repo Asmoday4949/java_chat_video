@@ -74,6 +74,7 @@ public class JChat extends Box
 
 	private void control()
 		{
+		jTextPaneChat.setContentType("html/plain");
 		jTextPaneChat.setEditable(false);
 		}
 

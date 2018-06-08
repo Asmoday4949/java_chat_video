@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import ch.hearc.cours.tools.gui.MagasinImage;
+import ch.hearc.cours.videochat.data.UserData;
 
 public class JMessageInput extends Box
 	{
@@ -66,7 +67,8 @@ public class JMessageInput extends Box
 			@Override
 			public void actionPerformed(ActionEvent event)
 				{
-				ServiceGUI.getInstance().sendMessage(jTextFieldMessageInput.getText() + END_LINE);
+				String nickname = UserData.getInstance().getNickname();
+				ServiceGUI.getInstance().sendMessage(nickname + ": " + jTextFieldMessageInput.getText() + END_LINE);
 				jTextFieldMessageInput.setText(EMPTY);
 				}
 			};
