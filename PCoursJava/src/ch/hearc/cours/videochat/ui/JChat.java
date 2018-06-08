@@ -1,12 +1,15 @@
 
 package ch.hearc.cours.videochat.ui;
 
+import java.io.IOException;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
 
 import ch.hearc.cours.tools.gui.JComponentTool;
 
@@ -21,6 +24,9 @@ public class JChat extends Box
 		{
 		super(BoxLayout.Y_AXIS);
 
+		this.htmlEditorKit = new HTMLEditorKit();
+		this.htmlDoc = new HTMLDocument();
+
 		geometry();
 		control();
 		appearance();
@@ -32,15 +38,19 @@ public class JChat extends Box
 
 	public void appendText(String message)
 		{
-		Document doc = jTextPaneChat.getDocument();
-		jTextPaneChat.setCaretPosition(doc.getLength());
+		jTextPaneChat.setCaretPosition(htmlDoc.getLength());
 
 		try
 			{
-			doc.insertString(doc.getLength(), message, null);
+			htmlEditorKit.insertHTML(htmlDoc, htmlDoc.getLength(), message, 0, 0, null);
 			}
 		catch (BadLocationException e)
 			{
+			e.printStackTrace();
+			}
+		catch (IOException e)
+			{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			}
 		}
@@ -76,6 +86,7 @@ public class JChat extends Box
 		{
 		jTextPaneChat.setContentType("text/html");
 		jTextPaneChat.setEditable(false);
+		jTextPaneChat.setDocument(htmlDoc);
 		}
 
 	private void appearance()
@@ -91,6 +102,9 @@ public class JChat extends Box
 	private JScrollPane jScrollPaneChat;
 	private JTextPane jTextPaneChat;
 	private JMessageInput jMessageInput;
+
+	private HTMLEditorKit htmlEditorKit;
+	private HTMLDocument htmlDoc;
 
 	/*------------------------------*\
 	|*			  Static			*|
