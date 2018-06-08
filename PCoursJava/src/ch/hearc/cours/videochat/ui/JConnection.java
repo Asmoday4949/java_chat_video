@@ -1,15 +1,16 @@
 
 package ch.hearc.cours.videochat.ui;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingConstants;
 
 import org.apache.commons.validator.routines.InetAddressValidator;
 
@@ -22,8 +23,6 @@ public class JConnection extends JPanel
 
 	public JConnection()
 		{
-		//super(BoxLayout.Y_AXIS);
-
 		geometry();
 		control();
 		appearance();
@@ -40,28 +39,24 @@ public class JConnection extends JPanel
 	private void geometry()
 		{
 		jLabelNickName = new JLabel("Pseudo: ");
-		jLabelIP = new JLabel("IP: ");
 		jLabelPort = new JLabel("Port: ");
-
 		jNickname = new JTextField();
+		jIPLabel = new JIPLabel();
 		jIP = new JTextField();
 		jPort = new JSpinner();
-
 		jButtonConnection = new JButton("Connexion");
 
-		GridLayout layout = new GridLayout(-1, 1);
-		this.setLayout(layout);
-
-		layout.setHgap(0);
-		layout.setVgap(0);
+		this.setLayout(new GridLayout(-1, 1));
 
 		this.add(jLabelNickName);
 		this.add(jNickname);
-		this.add(jLabelIP);
+		this.add(jIPLabel);
 		this.add(jIP);
 		this.add(jLabelPort);
 		this.add(jPort);
+		this.add(Box.createVerticalStrut(SPACE));
 		this.add(jButtonConnection);
+		this.add(Box.createVerticalGlue());
 		}
 
 	private void control()
@@ -80,8 +75,9 @@ public class JConnection extends JPanel
 
 	private void appearance()
 		{
-		this.jNickname.setHorizontalAlignment(SwingConstants.CENTER);
-		this.jIP.setHorizontalAlignment(SwingConstants.CENTER);
+		this.setPreferredSize(new Dimension(JCONNECTION_WIDTH, JCONNECTION_HEIGHT));
+		this.setMaximumSize(new Dimension(JCONNECTION_WIDTH, JCONNECTION_HEIGHT));
+		this.setMinimumSize(new Dimension(JCONNECTION_WIDTH, JCONNECTION_HEIGHT));
 		}
 
 	private boolean validateForm()
@@ -97,17 +93,22 @@ public class JConnection extends JPanel
 
 	// Tools
 	private JLabel jLabelNickName;
-	private JLabel jLabelIP;
+	private JIPLabel jIPLabel;
 	private JLabel jLabelPort;
 	private JTextField jNickname;
 	private JTextField jIP;
 	private JSpinner jPort;
 	private JButton jButtonConnection;
 
-	static final private  int MIN_PORT = 1024;
-	static final private  int MAX_PORT = 65535;
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
 
-	static final private int SPACE = 20;
-	static final private int JINPUT_WIDTH = 300;
+	private static final int MIN_PORT = 1024;
+	private static final int MAX_PORT = 65535;
+
+	private static final int SPACE = 20;
+	private static final int JCONNECTION_WIDTH = 250;
+	private static final int JCONNECTION_HEIGHT = 325;
 
 	}

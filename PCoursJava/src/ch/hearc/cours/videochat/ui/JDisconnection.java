@@ -1,3 +1,4 @@
+
 package ch.hearc.cours.videochat.ui;
 
 import java.awt.event.ActionEvent;
@@ -50,13 +51,14 @@ public class JDisconnection extends Box
 	private void control()
 		{
 		ActionListener listener = new ActionListener()
-					{
-						@Override
-						public void actionPerformed(ActionEvent arg0)
-							{
-							//ServiceRMI.getInstance().
-							}
-					};
+			{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+				{
+				//ServiceRMI.getInstance().
+				}
+			};
 		}
 
 	private void appearance()
@@ -72,4 +74,3 @@ public class JDisconnection extends Box
 	JButton jButtonDisconnect;
 	static final private int SPACE_WIDTH = 20;
 	}
-

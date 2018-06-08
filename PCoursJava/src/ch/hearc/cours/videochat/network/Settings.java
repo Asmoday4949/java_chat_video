@@ -4,11 +4,12 @@ package ch.hearc.cours.videochat.network;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.InetAddress;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 
 import ch.hearc.cours.tools.advanced.flux.SerializerFileTools;
 
-import com.bilat.tools.reseau.rmi.RmiAddress;
+import com.bilat.tools.reseau.rmi.NetworkTools;
 
 public class Settings implements Serializable
 	{
@@ -19,8 +20,15 @@ public class Settings implements Serializable
 
 	private Settings()
 		{
-		localAddress = RmiAddress.createLocal().getLocal();
-		System.setProperty("java.rmi.server.hostname", localAddress.getHostAddress()); // Patch linux: ip of localhost
+		try
+			{
+			localAddress = NetworkTools.localhost().entrySet().iterator().next().getValue();
+			System.setProperty("java.rmi.server.hostname", localAddress.getHostAddress());//Défini notre addresse IP à la JVM (patch linux ou si plusieurs interfaces)
+			}
+		catch (SocketException e)
+			{
+			e.printStackTrace();
+			}
 		}
 
 	/*------------------------------------------------------------------*\

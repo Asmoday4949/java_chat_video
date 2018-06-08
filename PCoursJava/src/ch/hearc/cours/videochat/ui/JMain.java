@@ -75,7 +75,7 @@ public class JMain extends JPanel
 		this.removeComponent(BorderLayout.CENTER);
 		this.removeComponent(BorderLayout.SOUTH);
 
-		this.add(new JCentrer(jConnection), BorderLayout.CENTER);
+		this.add(jCenteredConnection, BorderLayout.CENTER);
 		this.revalidate();
 		}
 
@@ -87,6 +87,7 @@ public class JMain extends JPanel
 		{
 		// JComponent : Instanciation
 		jConnection = new JConnection();
+		jCenteredConnection = new JCentrer(jConnection);
 		jWebcam = new JWebcam();
 		jChat = new JChat();
 		jImage = new JImage();
@@ -96,17 +97,16 @@ public class JMain extends JPanel
 		setLayout(borderLayout);
 
 		// JComponent : add
-		//loadJConnection();
 		}
 
 	private void control()
 		{
-		// rien
+		// Rien
 		}
 
 	private void appearance()
 		{
-
+		// Rien
 		}
 
 	private void removeComponent(String position)
@@ -125,6 +125,7 @@ public class JMain extends JPanel
 	// Tools
 	private BorderLayout borderLayout;
 	private JConnection jConnection;
+	private Component jCenteredConnection;
 	private JWebcam jWebcam;
 	private JImage jImage;
 	private JChat jChat;

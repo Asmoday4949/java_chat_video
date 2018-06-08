@@ -1,21 +1,22 @@
 
 package ch.hearc.cours.videochat.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 
-import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-import ch.hearc.cours.tools.gui.MagasinImage;
+import ch.hearc.cours.videochat.network.Settings;
 
-public class JFrameChat extends JFrame
+public class JIPLabel extends JPanel
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JFrameChat()
+	public JIPLabel()
 		{
 		geometry();
 		control();
@@ -34,36 +35,34 @@ public class JFrameChat extends JFrame
 	|*				Get				*|
 	\*------------------------------*/
 
-	public JMain getJMain()
-		{
-		return this.jMain;
-		}
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
 	private void geometry()
 		{
-		jMain = new JMain();
+		// JComponent : Instanciation
+		jLabelIP = new JLabel("IP: ");
+		jLabelYourIP = new JLabel("(" + Settings.getInstance().getLocal().getHostAddress() + ")");
 
-		setLayout(new BorderLayout());
+		// Layout : Specification
+		FlowLayout flowlayout = new FlowLayout(FlowLayout.LEFT);
+		setLayout(flowlayout);
 
-		this.add(jMain, BorderLayout.CENTER);
+		// JComponent : add
+		this.add(jLabelIP);
+		this.add(jLabelYourIP);
+
 		}
 
 	private void control()
 		{
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		// rien
 		}
 
 	private void appearance()
 		{
-		this.setIconImage(MagasinImage.ARC.getImage());
-		this.setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
-		this.setSize(1366, 768);
-		this.setLocationRelativeTo(null); // frame centrer
-		this.setVisible(true); // last!
+		jLabelYourIP.setFont(new Font("Courier", Font.BOLD, 12));
 		}
 
 	/*------------------------------------------------------------------*\
@@ -71,13 +70,7 @@ public class JFrameChat extends JFrame
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private JMain jMain;
-
-	/*------------------------------*\
-	|*			  Static			*|
-	\*------------------------------*/
-
-	private static final int MIN_WIDTH = 290;
-	private static final int MIN_HEIGHT = 355;
+	private JLabel jLabelIP;
+	private JLabel jLabelYourIP;
 
 	}
