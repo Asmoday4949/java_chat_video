@@ -52,7 +52,6 @@ public class JMain extends JPanel
 
 	public void loadJImage()
 		{
-		System.out.println("loadJImage");
 		this.removeComponent(BorderLayout.CENTER);
 		this.removeComponent(BorderLayout.SOUTH);
 
@@ -63,7 +62,6 @@ public class JMain extends JPanel
 
 	public void loadJWebcam()
 		{
-		System.out.println("loadJWebcam");
 		this.removeComponent(BorderLayout.CENTER);
 		this.removeComponent(BorderLayout.SOUTH);
 
@@ -74,7 +72,6 @@ public class JMain extends JPanel
 
 	public void loadJConnection()
 		{
-		System.out.println("loadJConnection");
 		this.removeComponent(BorderLayout.CENTER);
 		this.removeComponent(BorderLayout.SOUTH);
 
@@ -115,10 +112,8 @@ public class JMain extends JPanel
 	private void removeComponent(String position)
 		{
 		Component jComponent = borderLayout.getLayoutComponent(position);
-		System.out.println(jComponent);
 		if (jComponent != null)
 			{
-			System.out.println(position);
 			this.remove(jComponent);
 			}
 		}
