@@ -92,7 +92,7 @@ public class ServiceGUI
 			}
 		else if(state == WindowState.DISCONNECTED)
 			{
-			//main.loadJConnection();
+			main.loadJConnection();
 			}
 		else
 			{
