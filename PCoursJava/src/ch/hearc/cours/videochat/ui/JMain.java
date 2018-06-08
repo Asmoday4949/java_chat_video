@@ -52,28 +52,34 @@ public class JMain extends JPanel
 
 	public void loadJImage()
 		{
+		System.out.println("loadJImage");
 		this.removeComponent(BorderLayout.CENTER);
 		this.removeComponent(BorderLayout.SOUTH);
 
 		this.add(this.jChat, BorderLayout.SOUTH);
 		this.add(this.jImage, BorderLayout.CENTER);
+		this.revalidate();
 		}
 
 	public void loadJWebcam()
 		{
+		System.out.println("loadJWebcam");
 		this.removeComponent(BorderLayout.CENTER);
 		this.removeComponent(BorderLayout.SOUTH);
 
 		this.add(this.jChat, BorderLayout.SOUTH);
 		this.add(this.jWebcam, BorderLayout.CENTER);
+		this.revalidate();
 		}
 
 	public void loadJConnection()
 		{
+		System.out.println("loadJConnection");
 		this.removeComponent(BorderLayout.CENTER);
 		this.removeComponent(BorderLayout.SOUTH);
 
 		this.add(new JCentrer(jConnection), BorderLayout.CENTER);
+		this.revalidate();
 		}
 
 	/*------------------------------------------------------------------*\
@@ -89,7 +95,8 @@ public class JMain extends JPanel
 		jImage = new JImage();
 
 		// Layout : Specification
-		setLayout(new BorderLayout());
+		borderLayout = new BorderLayout();
+		setLayout(borderLayout);
 
 		// JComponent : add
 		loadJConnection();
@@ -107,11 +114,11 @@ public class JMain extends JPanel
 
 	private void removeComponent(String position)
 		{
-		BorderLayout layout = (BorderLayout)this.getLayout();
-		Component jComponent = layout.getLayoutComponent(position);
-
-		if(jComponent != null)
+		Component jComponent = borderLayout.getLayoutComponent(position);
+		System.out.println(jComponent);
+		if (jComponent != null)
 			{
+			System.out.println(position);
 			this.remove(jComponent);
 			}
 		}
@@ -121,6 +128,7 @@ public class JMain extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Tools
+	private BorderLayout borderLayout;
 	private JConnection jConnection;
 	private JWebcam jWebcam;
 	private JImage jImage;

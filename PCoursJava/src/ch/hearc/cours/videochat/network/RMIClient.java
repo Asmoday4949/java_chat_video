@@ -73,7 +73,7 @@ public class RMIClient
 		Chat_I chatRemote;
 		try
 			{
-			chatRemote = (Chat_I)RmiTools.connectionRemoteObjectBloquant(url, 1000, 100);
+			chatRemote = (Chat_I)RmiTools.connectionRemoteObjectBloquant(url, 500, 6);
 			work(chatRemote);
 			}
 		catch (RemoteException | MalformedURLException e)
