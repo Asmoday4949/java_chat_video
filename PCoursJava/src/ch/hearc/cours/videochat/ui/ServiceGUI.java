@@ -36,7 +36,7 @@ public class ServiceGUI
 		{
 		ServiceRMI.getInstance().connect(ip, port, port);
 
-		jFrameChat.getJMain().showChat();
+		jFrameChat.getJMain().loadJImage();
 
 		new Thread(() -> {
 		startWebcam();
@@ -89,6 +89,10 @@ public class ServiceGUI
 		if(state == WindowState.CONNECTED)
 			{
 			main.loadJWebcam();
+			}
+		else if(state == WindowState.DISCONNECTED)
+			{
+			main.loadJConnection();
 			}
 		else
 			{

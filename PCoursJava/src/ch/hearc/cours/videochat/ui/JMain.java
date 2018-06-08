@@ -2,6 +2,7 @@
 package ch.hearc.cours.videochat.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Image;
 
 import javax.swing.JPanel;
@@ -25,19 +26,6 @@ public class JMain extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
-
-	public void showConnection()
-		{
-		this.removeAll();
-		this.add(new JCentrer(jConnection), BorderLayout.CENTER);
-		}
-
-	public void showChat()
-		{
-		this.removeAll();
-		this.add(jWebcam, BorderLayout.CENTER);
-		this.add(jChat, BorderLayout.SOUTH);
-		}
 
 	/*------------------------------*\
 	|*				Set				*|
@@ -64,31 +52,33 @@ public class JMain extends JPanel
 
 	public void loadJImage()
 		{
-//		if(this.checkCenterIsNotConnection())
-//			{
-//			this.removeCenterComponent();
-//			this.add(this.jImage, BorderLayout.CENTER);
-//			}
+		this.removeComponent(BorderLayout.CENTER);
+		this.removeComponent(BorderLayout.SOUTH);
+
+		this.add(this.jChat, BorderLayout.SOUTH);
+		this.add(this.jImage, BorderLayout.CENTER);
 		}
 
 	public void loadJWebcam()
 		{
-//		if(this.checkCenterIsNotConnection())
-//			{
-//			this.removeCenterComponent();
-//			this.add(this.jWebcam, BorderLayout.CENTER);
-//			}
+		this.removeComponent(BorderLayout.CENTER);
+		this.removeComponent(BorderLayout.SOUTH);
+
+		this.add(this.jChat, BorderLayout.SOUTH);
+		this.add(this.jWebcam, BorderLayout.CENTER);
+		}
+
+	public void loadJConnection()
+		{
+		this.removeComponent(BorderLayout.CENTER);
+		this.removeComponent(BorderLayout.SOUTH);
+
+		this.add(new JCentrer(this.jConnection), BorderLayout.CENTER);
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
-
-	private boolean checkCenterIsNotConnection()
-		{
-		BorderLayout layout = (BorderLayout)this.getLayout();
-		return layout.getLayoutComponent(BorderLayout.CENTER) != this.jConnection;
-		}
 
 	private void geometry()
 		{
@@ -102,7 +92,7 @@ public class JMain extends JPanel
 		setLayout(new BorderLayout());
 
 		// JComponent : add
-		showConnection();
+		loadJConnection();
 		}
 
 	private void control()
@@ -115,10 +105,15 @@ public class JMain extends JPanel
 
 		}
 
-	private void removeCenterComponent()
+	private void removeComponent(String position)
 		{
 		BorderLayout layout = (BorderLayout)this.getLayout();
-		this.remove(layout.getLayoutComponent(BorderLayout.CENTER));
+		Component jComponent = layout.getLayoutComponent(position);
+
+		if(jComponent != null)
+			{
+			this.remove(jComponent);
+			}
 		}
 
 	/*------------------------------------------------------------------*\
