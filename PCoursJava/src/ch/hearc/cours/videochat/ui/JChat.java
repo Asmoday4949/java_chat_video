@@ -44,13 +44,8 @@ public class JChat extends Box
 			{
 			htmlEditorKit.insertHTML(htmlDoc, htmlDoc.getLength(), message, 0, 0, null);
 			}
-		catch (BadLocationException e)
+		catch (BadLocationException | IOException e)
 			{
-			e.printStackTrace();
-			}
-		catch (IOException e)
-			{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			}
 		}
@@ -99,12 +94,12 @@ public class JChat extends Box
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private JScrollPane jScrollPaneChat;
 	private JTextPane jTextPaneChat;
+	private JScrollPane jScrollPaneChat;
 	private JMessageInput jMessageInput;
 
-	private HTMLEditorKit htmlEditorKit;
 	private HTMLDocument htmlDoc;
+	private HTMLEditorKit htmlEditorKit;
 
 	/*------------------------------*\
 	|*			  Static			*|

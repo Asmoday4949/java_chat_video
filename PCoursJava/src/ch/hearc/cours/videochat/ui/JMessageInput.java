@@ -104,7 +104,6 @@ public class JMessageInput extends Box
 	|*			  Static			*|
 	\*------------------------------*/
 
-	private static final int SPACE_WIDTH = 30;
 	private static final String END_LINE = "\n";
 	private static final String EMPTY = "";
 	}
