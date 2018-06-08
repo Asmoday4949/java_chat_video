@@ -67,9 +67,15 @@ public class JMessageInput extends Box
 			@Override
 			public void actionPerformed(ActionEvent event)
 				{
-				String nickname = UserData.getInstance().getNickname();
-				ServiceGUI.getInstance().sendMessage(nickname + ": " + jTextFieldMessageInput.getText() + END_LINE);
-				jTextFieldMessageInput.setText(EMPTY);
+				String message = jTextFieldMessageInput.getText();
+
+				if(!message.isEmpty())
+					{
+					String nickname = UserData.getInstance().getNickname();
+
+					ServiceGUI.getInstance().sendMessage(nickname + ": " + message + END_LINE);
+					jTextFieldMessageInput.setText(EMPTY);
+					}
 				}
 			};
 
