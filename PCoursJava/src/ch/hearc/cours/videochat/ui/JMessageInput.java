@@ -1,6 +1,7 @@
 
 package ch.hearc.cours.videochat.ui;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import ch.hearc.cours.tools.gui.MagasinImage;
+import ch.hearc.cours.videochat.data.UserData;
 
 public class JMessageInput extends Box
 	{
@@ -66,8 +68,17 @@ public class JMessageInput extends Box
 			@Override
 			public void actionPerformed(ActionEvent event)
 				{
-				ServiceGUI.getInstance().sendMessage(jTextFieldMessageInput.getText() + END_LINE);
-				jTextFieldMessageInput.setText(EMPTY);
+				String message = jTextFieldMessageInput.getText();
+
+				if(!message.isEmpty())
+					{
+					String nickname = UserData.getInstance().getNickname();
+					Color color = UserData.getInstance().getColor();
+					String colorHex = String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
+
+					ServiceGUI.getInstance().sendMessage("<font color=\"" + colorHex + "\">" + nickname + "</font>: " + message + END_LINE);
+					jTextFieldMessageInput.setText(EMPTY);
+					}
 				}
 			};
 
