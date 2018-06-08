@@ -64,19 +64,31 @@ public class JMain extends JPanel
 
 	public void loadJImage()
 		{
-		this.removeCenterComponent();
-		this.add(this.jImage, BorderLayout.CENTER);
+//		if(this.checkCenterIsNotConnection())
+//			{
+//			this.removeCenterComponent();
+//			this.add(this.jImage, BorderLayout.CENTER);
+//			}
 		}
 
 	public void loadJWebcam()
 		{
-		this.removeCenterComponent();
-		this.add(this.jImage, BorderLayout.CENTER);
+//		if(this.checkCenterIsNotConnection())
+//			{
+//			this.removeCenterComponent();
+//			this.add(this.jWebcam, BorderLayout.CENTER);
+//			}
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
+
+	private boolean checkCenterIsNotConnection()
+		{
+		BorderLayout layout = (BorderLayout)this.getLayout();
+		return layout.getLayoutComponent(BorderLayout.CENTER) != this.jConnection;
+		}
 
 	private void geometry()
 		{
