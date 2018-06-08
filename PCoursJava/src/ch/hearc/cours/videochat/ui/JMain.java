@@ -96,7 +96,7 @@ public class JMain extends JPanel
 		setLayout(borderLayout);
 
 		// JComponent : add
-		loadJConnection();
+		//loadJConnection();
 		}
 
 	private void control()

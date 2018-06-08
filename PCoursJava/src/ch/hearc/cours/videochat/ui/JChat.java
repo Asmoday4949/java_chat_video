@@ -1,14 +1,14 @@
 
 package ch.hearc.cours.videochat.ui;
 
-import java.awt.Dimension;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+
+import ch.hearc.cours.tools.gui.JComponentTool;
 
 public class JChat extends Box
 	{
@@ -80,7 +80,7 @@ public class JChat extends Box
 
 	private void appearance()
 		{
-		jTextPaneChat.setPreferredSize(JTEXTAREA_CHAT_SIZE);
+		JComponentTool.setPreferredHeight(jTextPaneChat, JTEXTAREA_CHAT_SIZE_HEIGHT);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -96,6 +96,6 @@ public class JChat extends Box
 	|*			  Static			*|
 	\*------------------------------*/
 
-	private static final Dimension JTEXTAREA_CHAT_SIZE = new Dimension(500, 300);
+	private static final int JTEXTAREA_CHAT_SIZE_HEIGHT = 150;
 
 	}

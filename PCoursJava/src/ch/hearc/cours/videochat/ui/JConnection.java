@@ -3,7 +3,6 @@ package ch.hearc.cours.videochat.ui;
 
 import java.awt.GridLayout;
 
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -62,9 +61,7 @@ public class JConnection extends JPanel
 		this.add(jIP);
 		this.add(jLabelPort);
 		this.add(jPort);
-		this.add(Box.createVerticalStrut(SPACE));
 		this.add(jButtonConnection);
-		this.add(Box.createVerticalGlue());
 		}
 
 	private void control()
