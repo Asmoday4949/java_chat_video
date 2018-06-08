@@ -73,7 +73,7 @@ public class JMain extends JPanel
 		this.removeComponent(BorderLayout.CENTER);
 		this.removeComponent(BorderLayout.SOUTH);
 
-		this.add(new JCentrer(this.jConnection), BorderLayout.CENTER);
+		this.add(new JCentrer(jConnection), BorderLayout.CENTER);
 		}
 
 	/*------------------------------------------------------------------*\
