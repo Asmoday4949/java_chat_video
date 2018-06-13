@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -70,6 +71,10 @@ public class JConnection extends JPanel
 			{
 			ServiceGUI.getInstance().connect(jNickname.getText(), jIP.getText(), (Integer)jPort.getValue());
 			}
+		else
+			{
+			JOptionPane.showMessageDialog(this, "L'adresse IP ou le pseudo n'est pas valide", "Formulaire non-valide", JOptionPane.ERROR_MESSAGE);
+			}
 		});
 		}
 
@@ -84,7 +89,7 @@ public class JConnection extends JPanel
 		{
 		InetAddressValidator validator = new InetAddressValidator();
 
-		return validator.isValid(this.jIP.getText());
+		return validator.isValid(this.jIP.getText()) && !this.jNickname.getText().equals("");
 		}
 
 	/*------------------------------------------------------------------*\
