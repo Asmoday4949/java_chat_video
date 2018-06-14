@@ -40,7 +40,7 @@
 
 ---
 
-## Déconnection
+## Déconnexion
 
 @ul
  - Déconnexion
