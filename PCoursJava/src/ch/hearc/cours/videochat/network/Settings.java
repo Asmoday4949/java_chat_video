@@ -1,13 +1,10 @@
 
 package ch.hearc.cours.videochat.network;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-
-import ch.hearc.cours.tools.advanced.flux.SerializerFileTools;
 
 import com.bilat.tools.reseau.rmi.NetworkTools;
 
@@ -84,30 +81,6 @@ public class Settings implements Serializable
 			instance = new Settings();
 			}
 		return instance;
-		}
-
-	public static void save()
-		{
-		try
-			{
-			SerializerFileTools.serialize(FILE_SETTINGS, instance);
-			}
-		catch (ClassNotFoundException | IOException e)
-			{
-			e.printStackTrace();
-			}
-		}
-
-	public static void load()
-		{
-		try
-			{
-			instance = (Settings)SerializerFileTools.unserialize(FILE_SETTINGS);
-			}
-		catch (ClassNotFoundException | IOException e)
-			{
-			e.printStackTrace();
-			}
 		}
 
 	/*------------------------------------------------------------------*\
